@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xml:lang="en" xmlns="http://www.w3.org/2006/10/ttaf1" xmlns:tts="http://www.w3.org/2006/10/ttaf1#styling">
+<head>
+		<styling>
+			<!-- default style : the id should always be 'tts:default' -->
+			<style id="tts:default" tts:color="#ffffff" tts:fontFamily="Verdana" tts:fontSize="14px" tts:fontStyle="normal" tts:fontWeight="normal" tts:textAlign="center"  tts:backgroundColor="#000000"  />
+			<!-- second speaker style : the id can be anything -->
+			<style id="tts:speaker2" tts:color="#00ffff" tag="p"/>
+			<style id="tts:speaker3" tts:color="#FFFF00" tag="p"/>
+		</styling>
+</head>
+<body>
+<div>
+<p begin="00:00:00.100" end="00:00:04.000" style="tts:speaker2">(Music)</p>
+<p begin="00:00:04.100" end="00:00:07.400" style="tts:speaker2">&gt;&gt;Intro: Hi. This video introduces the <br/>Fix the Web Project </p>
+<p begin="00:00:07.500" end="00:00:10.900" style="tts:speaker2">through its founder Doctor Gail Bradbrook of Citizens Online,</p>
+<p begin="00:00:11.000" end="00:00:13.900" style="tts:speaker2">and a supporter and user of the <br/>serivce Mandy De la Mare </p>
+<p begin="00:00:14.000" end="00:00:16.700" style="tts:speaker2">who is chair of the Thalidomide Trust.</p>
+<p begin="00:00:17.000" end="00:00:21.000" style="tts:speaker2">(Music)</p>
+<p begin="00:00:21.200" end="00:00:23.900">&gt;&gt;Gail Bradbrook: Fix the Web is an <br/>innovative project from Citizens Online </p>
+<p begin="00:00:24.000" end="00:00:26.900">and is set up to address web accessibility.</p>
+<p begin="00:00:27.000" end="00:00:29.900">The internet can be hugely liberating <br/>for disabled people. </p>
+<p begin="00:00:30.000" end="00:00:33.900">It can help to overcome prejudice, <br/>it offers new way to communicate. </p>
+<p begin="00:00:34.000" end="00:00:37.100">But actually web technologies and software </p>
+<p begin="00:00:37.200" end="00:00:39.900">are repeating the mistakes of the built environment.</p>
+<p begin="00:00:40.000" end="00:00:43.900">So what we've done is make it really easy <br/>for disabled people to report issues. </p>
+<p begin="00:00:44.000" end="00:00:47.600">In under sixty seconds they can tell us <br/>what's bothering them.</p>
+<p begin="00:00:47.650" end="00:00:51.300">They can do it in several ways, they can fill out a form on the website. </p>
+<p begin="00:00:51.400" end="00:00:54.500">They can use Twitter or email to contact us, </p>
+<p begin="00:00:54.600" end="00:00:57.300">or they can actually use a downloadable toolbar.</p>
+<p begin="00:00:57.400" end="00:01:02.100" style="tts:speaker3">&gt;&gt;Mandy De la Mare: The kind of problems <br/>I experience on the internet are:</p>
+<p begin="00:01:02.200" end="00:01:05.000" style="tts:speaker3">filling in forms, social networking, </p>
+<p begin="00:01:05.100" end="00:01:10.000" style="tts:speaker3">chat rooms, downloading music <br/>or anything from downloading sites, </p>
+<p begin="00:01:10.100" end="00:01:12.500" style="tts:speaker3">anything where you've got photographs or graphics </p>
+<p begin="00:01:12.600" end="00:01:14.500" style="tts:speaker3">that clash with the screen reader </p>
+<p begin="00:01:14.700" end="00:01:16.400" style="tts:speaker3">would make it fall over.</p>
+<p begin="00:01:16.500" end="00:01:19.400">&gt;&gt;Gail: I really felt that the Nominet Trust <br/>were brave in funding this project </p>
+<p begin="00:01:19.500" end="00:01:23.500">because to start off with we didn't have <br/>a clear agenda forward. </p>
+<p begin="00:01:23.600" end="00:01:26.900">The funding really enabled us to <br/>have a period of stakeholder dialogue </p>
+<p begin="00:01:27.000" end="00:01:31.400">with people like the British Computer Society <br/>and Nomensa and AbilityNet, </p>
+<p begin="00:01:31.500" end="00:01:35.400">and also disabled people to really <br/>get to the heart of the issue.</p>
+<p begin="00:01:35.500" end="00:01:40.400" style="tts:speaker3">&gt;&gt;Mandy: As individuals you don't get listened to. You can send emails to the companies. </p>
+<p begin="00:01:40.500" end="00:01:44.550" style="tts:speaker3">You can write to the companies but when it <br/>comes to actually doing anything </p>
+<p begin="00:01:44.600" end="00:01:46.650" style="tts:speaker3">they don't ever bother. </p>
+<p begin="00:01:46.750" end="00:01:49.050" style="tts:speaker3">But hopefully, something like Fix the Web </p>
+<p begin="00:01:49.200" end="00:01:53.250" style="tts:speaker3">which will be known nationally, then they might take more notice of that.</p>
+<p begin="00:01:53.350" end="00:01:58.200">&gt;&gt;Gail: What we're aiming for with Fix the Web is having at least ten thousand volunteers on hand </p>
+<p begin="00:01:58.350" end="00:01:59.900">to deal with web accessibility issues. </p>
+<p begin="00:02:00.850" end="00:02:03.100">And with sufficient disabled people reporting </p>
+<p begin="00:02:03.200" end="00:02:07.600">we could process a quarter of a million websites in the space of a couple of years, </p>
+<p begin="00:02:07.750" end="00:02:10.150">and I really think that would <br/>make a big impact.</p>
+<p begin="00:02:10.300" end="00:02:14.150" style="tts:speaker2">(End Music)</p>
+</div>
+</body>
+</tt>
