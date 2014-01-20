@@ -1,5 +1,6 @@
-# Ignore configuration files that may contain sensitive information.
-sites/*/*settings*.php
+# Ignore settings file.
+sites/*/settings.php
+
 
 # Ignore Robs module
 /sites/all/modules/ftw-module
