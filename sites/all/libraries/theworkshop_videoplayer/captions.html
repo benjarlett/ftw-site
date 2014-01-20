@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>The Workshop accessible video player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	</head>
+	
+	<body >
+		
+	<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+
+		<div id="container" style="width:800px">
+			<h1>The Workshop accessible video player</h1>
+			<hr/>
+			<h2>Captions</h2>
+
+			<h3>Introduction</h3>
+			<hr/>
+			<p>Captions are essentially a text version of the spoken word in the video. Ideally it is best to caption all video, but if this is not possible, a transcript will provide access to the audio content of the video.</p>
+			Some points to consider when creating captions.
+			<ul>
+				<li>Captions should match exactly what is said in the audio.</li>
+				<li>You should include important background sounds; these are usually put inside square brackets like this: [laughter], [music].</li>
+				<li>When a new speaker speaks for the first time, they should be identified if known. This is done by adding their name or title at the beginning of the caption. Once they have been introduced you do not need to do this again.</li>
+				<li>Tags such as &gt;&gt; signify a new/change of speaker; this can also be emphasised using a different text colour for each speaker.</li>
+			</ul>
+
+			For further reading, this <a href="http://www.dcmp.org/caai/nadh20.pdf">Closed Captioning Standards</a> document should answer any questions you may have. 
+			
+			<h3>Caption files</h3>
+			<hr/>
+			<p>The Workshop accessible video player supports captions in the <a href="http://www.w3.org/TR/ttaf1-dfxp/">Timed Text format</a>. This is an XML formatted text file containing the transcript of the video with time code information telling the player when to show the text.<br/>
+			</p>
+			<p>Caption XML files can be created with any text editor or with a code editor such as <a href="http://notepad-plus-plus.org/">Notepad++</a> which will colour the XML tags making it easier to read.</p>
+			<p>A simple caption file might look like this.</p>
+			<pre>
+&lt;tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1" xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling" &gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div xml:lang="en"&gt;			
+ &lt;p begin="00:00:00.50" end="00:00:04.00"&gt; &gt;&gt; Clive: I’ve been growing giant pumpkins for about 30 years now.&lt;/p&gt;
+ &lt;p begin="00:00:04.00" end="00:00:06.00"&gt; &gt;&gt; Prof Sue Hartley: And have they been getting bigger every year.&lt;/p&gt;
+ &lt;p begin="00:00:6.00" end="00:00:7.00"&gt;etc. etc&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/tt&gt;
+</pre>
+
+			
+			<h3>Caption styling</h3>
+			<hr/>
+			<h4>Introduction</h4>
+			<p>You can alter the look of the caption text by creating a new style. This can be useful for identifying different speakers, using a different colour for each.</p>
+			
+			<p>By default all captions are styled to white text, Verdana font at size 14px. To change the style of the captions that are displayed you will need to add a different style tag in the caption XML file.</p>
+			
+			<h4>Creating a style</h4>
+			<p>A caption style is created inside the <code>&lt;head&gt;</code> tags of the caption XML file.
+			
+			<p>A caption style might look like this.</p>
+			<pre>
+&lt;head&gt;
+ &lt;styling&gt;
+  &lt;style id="tts:default" tts:color="#FFFFFF" tts:fontFamily="Verdana" tts:fontSize="14px" tts:fontWeight="normal" tts:textAlign="center"  /&gt;
+ &lt;/styling&gt;
+&lt;/head&gt;
+</pre>
+
+			<p>All the styles must sit inside <code>&lt;styling&gt;</code> tags. Each style is defined using a <code>&lt;style&gt;</code> tag.</p>
+			<p>Each <code>&lt;style&gt;</code> can have the following attributes:</p>
+			<table cellspacing="0" cellpadding="3" border="1" >
+			<tr>
+				<th>Attribute</th>
+				<th width="50%">Function</th>               
+				<th>Required</th>
+				<th>Example</th>
+			</tr>
+			<tr>
+				<td>id</td>
+				<td>The <code>id</code> must be unique and must begin with 'tts:'. The default style is defined by 'tts:default'. This will set the style for all captions.</td>
+				<td>Yes</td>
+				<td>id="tts:my_new_style"</td>
+			</tr>
+			<tr>
+				<td>tts:color</td>
+				<td>A hex colour code, see <a href="http://www.w3schools.com/html/html_colornames.asp">this list of HTML colours</a>. Bear in mind that some colours may not be suitable for people with vision conditions.</td>
+				<td>No</td>
+				<td>tts:color="#00FFFF"</td>
+			</tr>
+			<tr>
+				<td>tts:fontFamily</td>
+				<td>A font family for the caption text, see <a href="http://www.w3.org/Style/Examples/007/fonts.en.html">this list of font families</a>.</td>
+				<td>No</td>
+				<td>tts:fontFamily="Times"</td>
+			</tr>
+			<tr>
+				<td>tts:fontSize</td>
+				<td>A size in pixels for the caption text.</td>
+				<td>No</td>
+				<td>tts:fontSize="16px"</td>
+			</tr>
+			<tr>
+				<td>tts:fontWeight</td>
+				<td>A weight for the caption text. Accepted values are 'normal' and 'bold'.
+				<br/>NOTE: If you want to make text within the caption <b>bold</b>, <i>italic</i> or <u>underlined</u>, use the HTML <code>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</code> tag around the text.</td>
+				<td>No</td>
+				<td>tts:fontWeight="bold"</td>
+			</tr>
+			<tr>
+				<td>tts:textAlign</td>
+				<td>An alignment for the caption text. Accepted values are 'left', 'center', and 'right'.</td>
+				<td>No</td>
+				<td>tts:textAlign="left"</td>
+			</tr>
+			</table>
+			
+			
+			<h4>Applying a caption style</h4>
+			<p>To apply the style you have created you need to add the style id to the <code>&lt;p&gt;</code> tag of the caption you want to style. This is done by adding <code>style="tts:my_new_style"</code>, where the 'style="id goes here"' matches the 'id' of the new style you have created.</p>
+			
+			<p>A styled caption file might look like this.</p>
+			<pre>
+&lt;tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1" xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling" &gt;
+&lt;head&gt;
+&lt;styling&gt;
+  <b>&lt;style id="tts:my_new_style" tts:color="#00FFFF" tts:fontFamily="Times" tts:fontSize="16px" tts:fontWeight="bold" tts:textAlign="left"  /&gt;</b>
+ &lt;/styling&gt;
+&lt;/head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div xml:lang="en"&gt;			
+ &lt;p begin="00:00:00.50" end="00:00:04.00" <b>style="tts:my_new_style"</b>&gt; &gt;&gt; Clive: I’ve been growing giant pumpkins for about 30 years now.&lt;/p&gt;
+ &lt;p begin="00:00:04.00" end="00:00:06.00"&gt; &gt;&gt; Prof Sue Hartley: And have they been getting bigger every year.&lt;/p&gt;
+ &lt;p begin="00:00:04.00" end="00:00:06.00" <b>style="tts:my_new_style"</b>&gt; &gt;&gt; Oh yes, with the seed selection they are getting bigger every year.&lt;/p&gt;
+ &lt;p begin="00:00:6.00" end="00:00:7.00"&gt;etc. etc&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/tt&gt;
+</pre>		
+
+			<p>Each time you want the new style to be used you need to add it to the caption as above.</p>
+			
+			
+			<h3>Captioning Tools</h3>
+			<hr/>
+			<p>The following is a list of free captioning tools that can help when captioning video. You will need to save/export out the caption file in a <strong>Timed Text</strong> format.
+			<p>
+				<strong>Subtitle Edit</strong><br/>
+				<a href="http://www.nikse.dk/SubtitleEdit">Subtitle Edit</a> downloadable software.
+			</p>
+			<p>	
+				<strong>Subtitle Horse</strong><br/>
+				<a href="http://subtitle-horse.com/">Subtitle Horse</a> online tool.
+			</p>
+			<p>	
+				<strong>YouTube</strong><br/>
+				You could caption the video using <a href="http://support.google.com/youtube/bin/answer.py?hl=en-GB&answer=100077">YouTube's captioning</a> tool or its auto-captioning feature.<br/>
+				You will then need to download the file, which will be in SBV format, and convert to SRT (see <a href="http://www.gidsgoldberg.com/sbv_docs_converter.shtml">SBV converter</a>). Once converted you can then use this <a href="http://vsync.tunezee.com/convertCaption.html">vSync tool</a> to convert to timed text format for use in our player</p>
+
+			<h3>Troubleshooting captions</h3>
+			<hr/>
+			<p>If your captions file does not display, here are a few things to check.
+				<ul>
+					<li>Check the URL to the caption file is correct.</li>
+					<li>Open the XML file in an internet browser. It will tell you if there are any errors.</li>
+					<li>Check for any tags that are not closed or are missing: <br/>e.g. <code>&lt;p begin="00:00:00.50" end="00:00:04.00"&gt; text here.</code><br />This will not work as the closing <code>&lt;/p&gt;</code> is missing.</li>
+					<li>Check for special characters such as the &gt; or &amp; symbols. These should be the HTML version, see this <a href="http://www.w3schools.com/tags/ref_entities.asp">HTML entities list</a> for more info.</li>
+				</ul>
+			</p>
+       </div>
+
+		
+	</body>
+</html>

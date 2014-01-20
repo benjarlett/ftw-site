@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Workshop Accessible Video Player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="swfobject/swfobject.js" type="text/javascript"></script>
+		<script src="modernizr.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+</script>
+	</head>
+	
+	<body bgcolor="#ffffff" onload="createVideoPlayer('flash');"><!-- onload of HTML page -->
+	
+	<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+	<div id="container">
+		<h1>The Workshop Accessible Video Player</h1>
+		<hr/>
+		<h2>HTML5 fallback example</h2>
+		<p>This is an embed example that falls back to using HTML5 &lt;video&gt; element. You could use this if you want your video content to be available for Mobile or iPad users. The video being displayed using HTML5 will not have any of the accessibility support of our player.</p>
+		<p>Please see the HTML code of this page to see a working example.</p>
+
+		<br/>
+		<div id="flash">
+			
+			<!-- HTML5 fallback if flash is not installed -->
+			<div id="usingHtml5message"><p>This video is using the HTML5 video tag rather than Flash. To view the The Workshop's Accessbile videoplayer you must have JavaScript enabled, and the latest version of the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.
+			<br/><br/>For a great guide on using HTML5 video see <a href="http://diveintohtml5.info/video.html">dive into HTML5</a>.
+			<br/><br/>Please note that HTML5 is only supported in some browsers. Also you may need to create multiple versions of your video to support different browsers. You can use the online <a href="http://www.mirovideoconverter.com/">Miro Video Converter</a> to create the filetypes you may need.</p>
+			<p>If you are still having trouble viewing the videos then you may need to add the correct MIME types to your webserver, see <a href="http://www.besthostratings.com/articles/mime-types-htaccess.html">Adding mime types using .htaccess</a> for more information.</p></div>
+			
+			<div id="playingType"></div>
+			
+			<div id="html5NotSupportedmessage"><strong>HTML5 Video not supported</strong>
+				<br/>
+				To view the The Workshop's Accessbile videoplayer, you must have JavaScript enabled, and the latest version of the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>. 
+				<br/><br/>
+				Because of this we are trying to display the video using HTML5, but something is not working. Perhaps you need to update your Browser or even update your graphics card drivers.</div>
+			
+			<!-- HTML 5 Video tag with different versions of video for different browsers  poster="assets/images/demo_still.jpg-->
+			<video id="my_video" preload="auto" controls width="600" height="337" tabindex="0" data-setup="{}" tabindex="0">
+				<source src="assets/video/dummy_video.mp4" type='video/mp4'>
+				<source src="assets/video/dummy_video.ogv" type='video/ogg'>
+				<source src="assets/video/dummy_video.webm" type='video/webm'>
+			</video>
+			
+			
+			<!--<p>To view this content, you must have JavaScript enabled, and the latest version of the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.</p>-->
+		</div>
+			
+		<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+			
+			
+			//removes the elment specified
+			var removeElementById = function (id){    
+				if(!id){ return false; }
+				var element = document.getElementById(id);
+				if(element){
+					element.parentNode.removeChild(element);
+				}
+			};
+
+			
+			function doHTML5Detect() {
+				//is correct version of flash installed?
+				if(swfobject.hasFlashPlayerVersion("10.1")) {
+					return;
+				}
+				
+				//flash is not installed use HTML5
+				
+				//modernizr detection
+				if (Modernizr.video) {
+					//we are using HTML5 video remove not supported message
+					removeElementById("html5NotSupportedmessage");
+					
+					var element = document.getElementById("playingType");
+					if(!element) return;
+					
+					element.innerHTML = "<strong>Your browser supports:</strong>";
+					
+					//what video type does it support?
+					if (Modernizr.video.h264) {
+						// try H.264 video + AAC audio in an MP4 container
+						element.innerHTML = element.innerHTML + "<br/>mp4";
+					}
+					if (Modernizr.video.ogg) {
+						//supports ogg
+						element.innerHTML = element.innerHTML+ "<br/>ogg";
+					} 
+					if (Modernizr.video.webm) {
+						//supports webm
+						element.innerHTML = element.innerHTML + "<br/>webm";
+					}
+				}
+				else {
+					//html5 not supported - show message
+					removeElementById("my_video");
+					removeElementById("usingHtml5message");
+				}
+			}
+			
+			
+			/**
+			* id = id of div that will contain the video player (in this case 'flash')
+			*/
+			function createVideoPlayer(id)
+			{
+				var params = {};
+				params.bgColor = "#000000";
+				params.allowFullScreen = true;
+				
+				var flashvars = {};
+				flashvars.id = id;//set ID of flash for javascript communication
+				//
+				flashvars.mediaURL = "video/dummy_video.flv";//FLV file
+				flashvars.imageURL = "assets/images/dummy_still.jpg";
+				flashvars.captionsURL = "assets/captions/dummy_captions.xml";
+				flashvars.audioDescriptionURL = "assets/audio/dummy_audiodesc.mp3";
+				flashvars.language = "en/";//folder in assets containing 'video_player.xml' [optional] if not used looks for 'video_player.xml' in root of assets folder
+	
+				//video and image will be scaled to the dimensions supplied
+				swfobject.embedSWF("assets/videoplayer.swf", id, "600", "337", "10.1", null, flashvars, params);
+		
+				//after embedding flash do the HTML5 detection in case flash is not supported
+				doHTML5Detect();
+			}
+			
+
+
+			/* ]]> */
+		</script>
+		
+		
+		
+		</div>
+
+	</body>
+</html>
+
+
+
+
+

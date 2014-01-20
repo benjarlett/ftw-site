@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>The Workshop accessible video player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="swfobject/swfobject.js" type="text/javascript"></script><!-- SWFObject javascript -->
+		<script src="videoplayer.js" type="text/javascript"></script><!-- Javascript file containing Video player functions -->
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	</head>
+	
+	<body onload="createVideoPlayer('video')"><!-- onload of HTML page - send div id of div to contain player -->
+		
+	<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+
+		<div id="container">
+			<h1>The Workshop accessible video player</h1>
+			<hr/>
+			<h2>Embed example</h2>
+			
+			<p>This page shows an example of how to embed the The Workshop Flash video player (v0.1.0.2) and also describes how to embed the player into an HTML page.</p>
+			<p>We recommend using <a href="http://code.google.com/p/swfobject/" target="_new">SWFObject</a> embed, and Flash player version 10.1 and above.</p>
+			<p>Please see the HTML code of this page to see a working example</p>
+
+			<div id="help">
+				<p><a href="help.html">Video Player Help</a> | <img src="images/french_flag.jpg" height="10" width="20" alt="French flag" /> <a href="example_fr.html">Francais</a></p>
+			</div>
+		
+			<!-- This is the DIV that will contain the video player. If the user does not have flash installed the message below will be shown -->
+			<div id="video">
+				<p>To view this content, you must have JavaScript enabled, and the latest version of the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.</p>
+			</div>
+		
+		<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+			
+			/**
+			* id = is passed to the function and is the id of div that will contain the video player (in this case 'video'). see <body> tag
+			*/
+			function createVideoPlayer(id)
+			{
+				//hide transcript div on load
+				toggleTranscript();
+				
+				//Dimensions of the player
+				var playerwidth = 600; // change this to the width of your video
+				var playerheight = 337; // change this to the height of your video    				
+				
+				//Parameters
+				var params = {};
+				params.bgColor = "#000000";//background colour
+				params.allowFullScreen = true;//This must be true to allow full screen functionality
+				
+				//Flash vars for configuring the player
+				var flashvars = {};
+				flashvars.id = id; //set 'id' of flash for javascript communication, the 'id' of the DIV to contain the player
+				
+				//UI customisation
+				//flashvars.useTextControls = "false";  //show hide the text setting buttons [optional default = true]
+				//flashvars.useFullScreen = "false";  //show hide the full screen button [optional default = true]
+				//flashvars.useShortCuts = "false";  //show hide the shortcuts [i] screen button [optional default = true]
+				//flashvars.useVolume = "false";  //show hide the volume button [optional default = true]
+				//flashvars.useRestart = "false";  //show hide the restart button [optional default = true]
+		
+				//Toolbar functionality
+				//flashvars.useToolbar = "true";  //show hide the control toolbar [optional default = true]
+				//flashvars.hideToolbarWhenPlaying = "false";	//true = hides toolbar when the video is playing [optional default = true]
+				//flashvars.hideToolbarWhenPaused = "false";	//true = hides toolbar when the video is paused [optional default = false]
+				
+				//Media types
+				flashvars.mediaURL = "video/dummy_video.flv";	//FLV file [make sure the URL to the video is relative to the HTML page embedding the player]
+				//flashvars.mediaURL = "assets/audio/swinging_jazz_bass_30.mp3";//MP3
+				//flashvars.mediaURL = "Oe3St1GgoHQ";//YouTube
+				
+				//Image to display
+				flashvars.imageURL = "assets/images/dummy_still.jpg"; //[optional]
+				
+				//Captions
+				flashvars.captionsURL = "assets/en/captions/dummy_captions.xml"; //[optional]
+				//flashvars.captionsURL = "assets/fr/captions/dummy_captions.xml";
+				//flashvars.captionsOnByDefault = "true"; //This controls the state of the captions on load of the player, true = captions on [default = false]
+				
+				//Audio desctitions
+				flashvars.audioDescriptionURL = "assets/audio/dummy_audiodesc.mp3";	//[optional] ignnored if the media is mp3
+				//flashvars.audioDescOnByDefault = "true"; //This controls the state of the audio description on load of the player, true = audio desc on [default = false]
+				
+				//langiage setting - point to the video_player.xml file containing all text for the player
+				flashvars.language = "en/";	//folder in assets containing video_player.xml [optional]
+				//flashvars.language = "fr/";	//folder in assets containing video_player.xml [optional]
+				
+				//
+				//video and image will be scaled to the dimensions supplied
+				swfobject.embedSWF("assets/videoplayer.swf", id, playerwidth , playerheight, "10.1", null, flashvars, params);
+				
+			}
+
+		</script>
+		<br />
+		<br />        
+
+		<!-- Transcript functionality -->
+		<p><a href="javascript:toggleTranscript();" id="viewTranscript"><span id="transcriptText">Show transcript</span></a></p>
+        <div id="transcriptTextAlt" style="display:none;">Hide transcript</div>
+		<div id="transcript" class="transcriptcontent" style="display:block;">
+			<p>
+			<strong>Transcript.</strong><br/>
+			Clive: I’ve been growing giant pumpkins for about 30 years now.<br/>
+			Prof Sue Hartley: And have they been getting bigger every year.<br/>
+			Clive: Oh yes, with the seed selection they are getting bigger every year.<br/>
+			Prof Sue Hartley: So what are the problems with growing giant pumpkins?<br/>
+			Clive: Well they can explode.<br/>
+			Prof Sue Hartley: That sounds very messy.<br/>
+			Clive: Oh yes, I’ve had incidents myself, i watered them in the evening had a storm at night, and when I went back in the morning the pumpkin had exploded all over the garden.<br/>
+			Prof Sue Hartley: Sounds very dangerous.<br/>
+			Clive: Yes I believe they go off like a small grenade.<br/>
+			Prof Sue Hartley: But how big can pumpkins actually get Clive? What's the limit to the size of these pumpkins?<br/>
+			Clive: We just don't know, as far as I can see there’s no limit, I can see in less than 10 years time we could have pumpkins weighing up to two tonnes.<br/>
+			Prof Sue Hartley: Clive can certainly grow veg, so we've got here a giant marrow with some seeds inside. <br/>
+			So we can now try and get them out. Now hopefully this isn’t going to go off like a grenade. But we're going to get Alex here to chop it up for us. <br/>
+			Now I have to say before Alex starts, we've been trying to keep this marrow cool and fresh since October and I have to say I’m not entirely sure how successful we've been,	it might be rather messy, hence the aprons, and I’m going to hide behind the desk. You might want to duck you guys sitting near the front Let's see what happens. <br/>
+			Go for it guys. <br/>
+			Oh wow! <br/>
+			Thank you Alex.	<br/>
+			END.
+			</p>
+		</div>
+
+			<!-- Example Javascript controls -->
+			<div id="links">
+				<p><strong>JavaScript Controls</strong> see the <a href="javascript_api.html">JavaScript API</a> for more information.</p>
+				<p><a href="Javascript:changeMedia('FLV')">Switch to play an FLV video</a> | <a href="Javascript:changeMedia('YOUTUBE')">Switch to play a YouTube video</a> | <a href="Javascript:changeMedia('AUDIO')">Switch to play an audio file</a></p>
+				<p><a href="Javascript:play()">Play</a> | <a href="Javascript:pause()">Pause</a> | <a href="Javascript:fastforward()">Fast forward</a> | <a href="Javascript:rewind()">Rewind</a> | <a href="Javascript:restart()">Restart</a></p>
+				<p><a href="Javascript:togglemute()">Toggle mute</a> |	<a href="Javascript:volumeup()">Volume up</a> |	<a href="Javascript:volumedown()">Volume down</a></p>
+				<p><a href="Javascript:togglehelp()">Toggle help</a> | <a href="Javascript:togglecaptions()">Toggle captions</a> | <a href="Javascript:toggleaudiodescription()">Toggle audio description</a></p>
+				<p><a href="Javascript:changetextsize()">Change text size</a> | <a href="Javascript:changetextcolour()">Change text colour</a></p>
+			</div>
+			
+			
+		<h2>How to embed the player</h2>
+		
+		<p><strong>Step 1</strong>: Include the <a href="http://code.google.com/p/swfobject/" target="_new">SWFObject</a> JavaScript in the HTML page</p>
+		<p>for example within the HTML <code>head</code> tag.</p> 
+		<pre>&lt;script src="swfobject/swfobject.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+		
+		<p><strong>Step 2</strong>: Include the <code>videoplayer.js</code> JavaScript in the HTML page</p>
+		<p>for example within the HTML <code>head</code> tag.</p> 
+		<pre>&lt;script src="videoplayer.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+		
+		<p><strong>Step 3</strong>: Call the <code>createVideoPlayer()</code> JavaScript function from the HTML <code>body</code> tag</p>
+		<p>for example in the HTML <code>body</code> tag.</p> 
+		<pre>&lt;body onload="createVideoPlayer('video')"&gt;</pre>
+		
+		<p><strong>Step 4</strong>: Create a HTML <code><a href="#div">div</a></code> tag with the <code>id</code> attribute "video". The content of this <code>div</code> tag will be replaced with the video player.</p>
+		<p>For example</p>
+		<pre>&lt;div id="video"&gt;The video player will replace this text. You would normally place your no JavaScript message here. For more info see <code><a href="#div">div</a></code>.&lt;/div&gt;</pre>
+
+		<p><strong>Step 5</strong>: In the HTML <code>body</code> tag, set up the Javascript <a href="http://code.google.com/p/swfobject/" target="_new">SWFObject</a> embed and the function call <code>createVideoPlayer()</code>.</p>
+		<p>For example</p>
+		<pre>&lt;script type="text/javascript"&gt;
+	
+    //id = is passed to the function and is the id of div that will contain the video player (in this case 'video'). see &lt;body&gt; tag
+    function createVideoPlayer(id) {
+    
+        //change to the width/height of your video
+        var playerwidth=600; 
+        var playerheight=400;               
+        
+        var <a href="#params">params</a> = {};
+        params.allowFullScreen = true;//allows full screen to work
+        
+        var <a href="#flashvars">flashvars</a> = {};	
+        flashvars.id = id;	//set ID of flash for javascript communication
+        
+        //toolbar functionality
+        flashvars.hideToolbarWhenPlaying = "false";	//true = hides toolbar when the video is playing [optional default = true]
+        
+        //The video file
+        flashvars.mediaURL = "video/dummy_video.flv";	//FLV file [make sure the URL to the video is relative to the HTML page embedding the player]
+        
+        flashvars.imageURL = "assets/images/dummy_still.jpg"; //[optional]
+        flashvars.captionsURL = "assets/en/captions/dummy_captions.xml"; //[optional]
+        flashvars.audioDescriptionURL = "assets/audio/dummy_audiodesc.mp3"; //[optional]
+        flashvars.language = "en/";	//folder in assets containing xliff xml [optional]
+      
+        //video and image will be scaled to the dimensions supplied
+        swfobject.embedSWF("assets/videoplayer.swf", id, <a href="#dims">playerwidth , playerheight</a> , "10.1", null, flashvars, params);
+}
+&lt;/script&gt;
+
+</pre>
+
+		<a name="dims"></a>
+        
+		<h3>Embed dimensions</h3>
+		
+		<p><strong>FLVs</strong></p>
+		<p>The player should be embedded at the exact height of the FLV in pixels. To find out the dimensions of the FLV video, use an FLV player such as <a href="http://www.videolan.org/vlc/" target="_new">VideoLan VLC player</a>.</p>
+		<p><strong>YouTube videos</strong></p>
+		<p>When embedding the player using a YouTube video, find out what sizes the video you have chosen is available in. Do this by looking at the embed code of your chosen video on the YouTube website. <br/>Typical YouTube dimensions are 560 x 340, 640 x 385, 853 x 505, or 1280 x 745.</p>
+		<pre>
+playerwidth = the width in pixels of the video
+playerheight = the height in pixels of the video
+</pre>
+
+
+		<a name="params"></a>
+		<h3>Embed parameters</h3>
+		<p>The standard parameters to use in the <a href="http://code.google.com/p/swfobject/" target="_new">SWFObject</a> embed are:</p>
+		<pre>
+params.bgColor = "#FFFFFF"; // background colour of the embed (optional)
+params.allowFullScreen = true; // set to true to enable full screen video playback
+</pre>
+		
+		<a name="flashvars"></a>
+		<h3>Flashvars</h3>
+		<br/>
+		<table cellspacing="0" cellpadding="3" border="1" >
+			<tr>
+				<th>Flashvar</th>
+				<th width="50%">Function</th>
+				<th>Default</th>                
+				<th>Required</th>
+			</tr>
+			<tr>
+				<td>id</td>
+				<td>The <code>id</code> of the HTML <code>div</code> where you want the video player to appear. This is required when targeting the video player with JavaScript. This is passed to the function from the function call, ie &lt;body onload="createVideoPlayer('flash')"&gt;.</td>
+                <td>N/A</td>
+				<td>Yes</td>
+			</tr>
+			
+			<tr>
+				<td>mediaURL</td>
+				<td>The path of the media to be played relative to the SWF file (videoplayer.swf). Or the absolute path to the media (if on another server for example). This is also where you add the id file of your YouTube video eg Oe3St1GgoHQ the last part of the YouTube url.</td>
+                <td>N/a</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>imageURL</td>
+				<td>The path of image to display when the player loads (PNG, JPG) relative to the HTML page that player is embedded in.<br/><strong>Note:</strong> To display correctly, the image should be the same dimensions as the embed dimensions of the player.</td>
+				<td>N/a</td>
+				<td>No</td>                
+			</tr>
+			<tr>
+				<td>captionsURL</td>
+				<td>URL to the captions file (XML) relative to the HTML page that player is embedded in.</td>
+				<td>N/a</td>
+				<td>No</td>                
+			</tr>
+			<tr>
+				<td>audioDescriptionURL</td>
+				<td>URL to the audio description file (MP3) relative to the HTML page that player is embedded in.</td>
+				<td>N/a</td>
+				<td>No</td>                
+			</tr>
+			<tr>
+				<td>language</td>
+				<td>Path to the folder containing the containing xliff xml file. This is relative to the SWF file (videoplayer.swf). </td>
+				<td>N/a</td>
+				<td>No</td>                
+			</tr>
+			
+			<tr>
+				<td>useToolbar</td>
+				<td>This shows or hides the control toolbar.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>useTextControls</td>
+				<td>This shows or hides the text colour and size option buttons.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>useFullScreen</td>
+				<td>This shows or hides the full screen button.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>useShortCuts</td>
+				<td>This shows or hides the help button.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>useVolume</td>
+				<td>This shows or hides the volume controller and mute button.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>useRestart</td>
+				<td>This shows or hides the restart button.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>hideToolbarWhenPlaying</td>
+				<td>This shows or hides the toolbar when the video is playing.</td>
+                <td>True</td>
+				<td>No</td>
+			</tr>
+			<tr>
+				<td>hideToolbarWhenPaused</td>
+				<td>This shows or hides the toolbar when the video is paused.</td>
+                <td>False</td>
+				<td>No</td>
+			</tr>
+			
+			<tr>
+				<td>captionsOnByDefault</td>
+				<td>Controls the state of the captions when the player first loads, true = captions on. </td>
+				<td>False</td>
+				<td>No</td>                
+			</tr>
+			<tr>
+				<td>audioDescOnByDefault</td>
+				<td>Controls the state of the audio description when the player first loads, true = audio description on.  </td>
+				<td>False</td>
+				<td>No</td>                
+			</tr>
+			
+		</table>
+		
+
+		<p><strong>Please note:</strong></p>
+		<p>Any combination of FlashVars can be sent in any order. If the URL to the asset is wrong, or the asset file does not exist the video player will ignore the FlashVar sent eg if the Caption file sent does not exist, the player will not display the captions or the captions button.</p>
+
+		<a name="div"></a>
+		<h3>Container div</h3>
+		<p>The <code>div</code> that will contain the video player must have an <code>id</code> attribute. The function call, createVideoPlayer('video'), most likely in the body tag &lt;body onload="createVideoPlayer('id')"&gt;, must include the id of the div where you want the player to be placed on the page. We also recommend that the <code>div</code> should contain a message to tell the user if they do not have the correct Flash player or have JavaScript disabled in their browser. An example including a suitable message is below.<br/>eg</p>
+		<pre>
+&lt;div id="video"&gt;
+	&lt;p&gt;To view this content, you must have JavaScript enabled, and the latest version of the &lt;a href="http://www.adobe.com/go/getflashplayer"&gt;Adobe Flash Player&gt;/a&gt;.&lt;/p&gt;
+	&lt;p&gt;&lt;a href="http://www.adobe.com/go/getflashplayer"&gt;&lt;img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" border="0" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+	<h3>Video player help page</h3>
+	<p>We recommend that when embedding the video player on a page, you provide a link to the <a href="help.html">Video Player Help</a> page. This page contains instructions on how to use the player and details shortcut keys.</p> 
+	
+	<h3>Files required by the video player</h3>
+	<p>There are a number of files required by the video player for it to work correctly. These are configuration XML files (project_styles.xml, xliff_loader.xml and the 'xliff' folder and obviously the 'videoplayer.swf' itself) that you will find in the assets folder in this zip file. These files and folder MUST sit in the same location and same level as the videoplayer.swf.</p>
+	
+	</div>
+	</body>
+</html>

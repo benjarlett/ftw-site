@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<head>
+	<styling>
+		<style id="default" color="#333333" fontFamily="Arial" fontStyle="normal" fontWeight="normal" textAlign="left" fontSize="12px"/>
+		<style id="help" color="#FFFFFF" fontFamily="Arial" fontStyle="normal" fontWeight="normal" textAlign="left" fontSize="10px"/>
+		<style id="tooltip" fontSize="13px"/>
+		<style id="scrub_bar" color="#CCCCCC" fontFamily="Arial" fontStyle="normal" fontWeight="normal" textAlign="left" fontSize="12px"/>
+	</styling>
+</head>

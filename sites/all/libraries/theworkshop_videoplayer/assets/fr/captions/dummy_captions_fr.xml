@@ -1,0 +1,16 @@
+﻿<tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1" xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling" >
+	<head>
+		<styling>
+			<!-- default style : the id should always be 'tts:default' -->
+			<style id="tts:default" tts:color="white" tts:fontFamily="Verdana" tts:fontSize="14px" tts:fontStyle="normal" tts:fontWeight="normal" tts:textAlign="center"  />
+			<!-- second speaker style : the id can be anything -->
+			<style id="tts:speaker2" tts:color="cyan" tag="p"/>
+		</styling>
+	</head>
+	<body>
+		<div xml:lang="en">			
+			<p begin="00:00:01.00" end="00:00:02.50">Rugir!</p>
+			<p begin="00:00:04.00" end="00:00:05.00">Rugir!</p>
+		</div>
+	</body>
+</tt>

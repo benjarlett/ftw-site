@@ -1,0 +1,222 @@
+<?php
+
+/**
+ * @file
+ * An accessibility checklist for Drupal.
+ */
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function a11y_checklist_checklistapi_checklist_info() {
+  $definitions['a11y_checklist'] = array(
+    '#title' => t('Accessibility checklist'),
+    '#description' => t('Keep track of your Drupal Search Engine Optimization tasks.'),
+    '#path' => 'admin/config/accessibility/accessibility-checklist',
+    '#help' => t("<p>Check off each accessibility-related task as you complete it. Don't forget to click the <em>Save</em> button!</p>"),
+
+    // Clean code.
+    // 'clean_code' => array(
+    //   '#title' => t('Clean code'),
+    // );
+
+    // Tables.
+    'tables' => array(
+      '#title' => t('Tables'),
+      '#description' => t('<p>Tables are used to organize and present tabular data such as finacial results, calendars, etc. Data cells need to be associated explicitely with header cells so screen reader users have an easier time navigating and understanding the content of the data table.</p>'),
+      'summary' => array(
+        '#title' => t('Describe complex data tables using the <code>summary</code> attribute in the <code>table</code> tag.'),
+      ),
+      'caption' => array(
+        '#title' => t('Consider using the <code>caption</code> element to describe the content of data tables.'),
+      ),
+      'th_thead' => array(
+        '#title' => t('Use <code>th</code> elements to tag colums or row headers; nest these headers in a <code>thead</code> tag.'),
+      ),
+      'headers_id' => array(
+        '#title' => t('Associate data cells explicitely with their appropriate headers using the <code>headers</code> and <code>id</code> attributes.')
+      ),
+    ),
+
+    // Forms.
+    'forms' => array(
+      '#title' => t('Forms'),
+      '#description' => t('<p>Provide each form element (text field, checkbox, dropdown list, etc.) with a descriptive label that is explicitely associated with the form element so users understand what input is expected of them.</p>'),
+      'label_for' => array(
+        '#title' => t('<p>Use the <code>label</code> tag and <code>for</code> attribute to structure the labels.</p>'),
+      ),
+      'unique_name' => array(
+        '#title' => t('<p>Provide each form element with a unique name, using the <code>id</code> attribute.</p>'),
+      ),
+      'label_for_same' => array(
+        '#title' => t('<p>Make sure the values of the <code>for</code> and <code>id</code> attributes are the same, so that the association is clear.</p>'),
+      ),
+      'errors' => array(
+        '#title' => t('Allow the user to recover from errors.'),
+        '#description' => t('<p>Allow the user to submit the form and to recover from errors, such as the failure to fill in all required fields, by making sure the information is also disclosed using only the keyboard</p>'),
+      ),
+      'display_none' => array(
+        '#title' => t('Do not hide form labels using <code>display: none</code>.'),
+        '#description' => t('<p>Do not hide form labels using display: none, as it also hides the labels from screen readers. Use CSS off-screen positioning instead.</p>'),
+      ),
+    ),
+
+    // Links.
+    'links' => array(
+      '#title' => t('Links'),
+      '#description' => t('<p>Every link should make sense if the link text is read by itself. Screen reader users may choose to read only the links on a web page. Certain links like "read more" or "click here" should therefore be avoided because those will not allow a user to understand where the links lead once they are taken out of their context.</p>'),
+      'complementary_text' => array(
+        '#title' => t('Complementary text'),
+        '#description' => t('<p>If such links need to be used, consider making them understandable out of context by completing them with significant complementary text that will then be positioned off-screen using CSS.</p>'),
+      ),
+      'hook_link_alter' => array(
+        '#title' => t('Use <a href="http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_link_alter/7" title="hook_link_alter on api.drupal.org">hook_link_alter</a> to remove or modify Drupal\'s default "read more" link on node teasers.'),
+      ),
+    ),
+
+    // Media.
+    'media' => array(
+      '#title' => t('Media'),
+      '#description' => t('<p>Alternative text provides a textual alternative to non-text content in web pages (such as images). It is especially helpful for people who are blind and rely on a screen reader to have the content of the website read to them, but also very important for search engine optimization (seo) purposes as it allows for more content to be indexed.</p><p>Videos and live audio should, at minimum, have captions and preferably a transcript. With archived audio, a transcription may be sufficient.</p>'),
+      'images_alt_tags' => array(
+        '#title' => t('Add alternative text to images.'),
+        '#description' => t('<p>Provide a short, relevant description of all images that convey information using the <code>alt</code> attribute within the <code>img</code> tag. Decorative images however should be given empty or null alt text so screen readers ignore these images.</p>'),
+      ),
+      'trascripts' => array(
+        '#title' => t('Add transcriptions.'),
+        '#description' => t('<p>Transcriptions add value to your web site. For example educational podcasts can be printed by students.</p>'),
+      ),
+      'nomensa_amp_install' => array(
+        '#title' => t('Optional: Install the Nomensa Accessible Media Player module.'),
+        '#default_value' => module_exists('nomensa_amp'),
+        'project_page' => array(
+          '#text' => t('Download'),
+          '#path' => 'http://drupal.org/project/nomensa_amp',
+        ),
+      ),
+      'nomensa_amp_configure' => array(
+        '#title' => t('Optional: Configure the Nomensa Accessible Media Player module.'),
+        'config_page' => array(
+          '#text' => t('Configure'),
+          '#path' => 'admin/config/media/nomensa-amp',
+        ),
+      ),
+    ),
+    'repetitive_elements' => array(
+      '#title' => t('Repetitive elements'),
+      '#description' => t('<p>Provide a mechanism that allows users to skip over navigation or other elements or blocks of information that repeat on every page. This is usually accomplished by providing a "Skip to Content", "Skip to Main Content", or "Skip Navigation" link at the very top of the page which jumps to the main content of the page.</p><p>Learn more about Skip navigation for web pages.</p>'),
+      'skip_link' => array(
+        '#title' => t("'Skip to Content' link."),
+        '#description' => t("<p>Create a hyperlink at the beginning of the page that points to an anchor at the very begining of the page's main content.</p>")
+      ),
+      'first_level_heading' => array(
+        '#title' => t('Main content begins with a <code>h1</code> tag.'),
+        '#description' => t('<p>Ensure the main content section of the page begins with a first level heading (h1) so screen reader users can jump to the main content by selecting the h1.</p>'),
+      ),
+    ),
+
+    // Color
+    'color' => array(
+      '#title' => t('Color'),
+      '#description' => t('<p>The use of color can enhance comprehension, but that information may not be available to a person who is colorblind and will be unavailable to screen reader users. Do not use color alone to convey information.</p>'),
+      'text' => array(
+        '#title' => t('Information conveyed through color is also conveyed in text.'),
+        '#description' => t('<p>Make sure that information conveyed through color is also conveyed in text so it can be picked up by screen readers as well.</p>'),
+      ),
+      'hyperlinks' => array(
+        '#title' => t('Refrain from only using color to present a hyperlink.'),
+        '#description' => t('<p>Refrain from only using color to present a hyperlink, as some users may not be able to perceive the color contrast with surrounding text.</p>'),
+      ),
+      'install_page_style' => array(
+        '#title' => t('Optional: Install the Page Style module.'),
+        'project_page' => array(
+          '#text' => t('Download'),
+          '#path' => 'http://drupal.org/project/pagestyle',
+        ),
+        '#default_value' => module_exists('pagestyle'),
+      ),
+      'configure_page_style' => array(
+        '#title' => t('Optional: Configure the Page Style module.'),
+        'configure_link' => array(
+          '#text' => t('Configure'),
+          '#path' => 'admin/config/user-interface/pagestyle',
+        ),
+      ),
+    ),
+
+    // Content.
+    'content' => array(
+      '#title' => t('Content'),
+      '#description' => t('<p>There are many ways to make your content easier to understand. Write clearly, use clear fonts, and use headings and lists appropriately.</p>'),
+      'install_text_size' => array(
+        '#title' => t('Optional: Install the Text Size module.'),
+        'project_page' => array(
+          '#text' => t('Download'),
+          '#path' => 'http://drupal.org/project/textsize',
+        ),
+        '#default_value' => module_exists('textsize'),
+      ),
+      'configure_text_size' => array(
+        '#title' => t('Optional: Configure the Text Size module.'),
+        'project_page' => array(
+          '#text' => t('Configure'),
+          '#path' => 'admin/config/user-interface/textsize',
+        ),
+      ),
+    ),
+
+    // ARIA.
+    'aria' => array(
+      '#title' => t('ARIA'),
+      'use_aria' => array(
+        '#title' => t('Use ARIA landmark roles within your theme(s).'),
+        'more_info' => array(
+          '#text' => t('More info'),
+          '#path' => 'http://www.w3.org/TR/wai-aria',
+        ),
+        'example' => array(
+          '#text' => t('Example'),
+          '#path' => 'http://mcdlr.com/wai-aria-cheatsheet',
+        ),
+        'tutorial' => array(
+          '#text' => t('Tutorial'),
+          '#path' => 'http://oliverdavies.co.uk/blog/2012/10/add-aria-landmark-roles-drupal-theme',
+        ),
+      ),
+      'block_aria_landmark_roles' => array(
+        '#title' => t('Optional: Install the Block ARIA Landmark Roles module.'),
+        '#description' => t('Easily add ARIA landmark roles to blocks via the blocks administration interface.'),
+        '#default_value' => module_exists('block_aria_landmark_roles'),
+        'project_page' => array(
+         '#text' => t('Download'),
+          '#path' => 'http://drupal.org/project/block_aria_landmark_roles',
+        ),
+      ),
+    ),
+
+    // JavaScript
+    'javascript' => array(
+      '#title' => t('JavaScript'),
+      'device_independent' => array(
+        '#title' => t('Ensure that JavaScript event handlers are device independent.'),
+        '#description' => t('<p>Ensure that JavaScript event handlers are device independent (e.g., they do not require the use of a mouse).</p>'),
+      ),
+      'rely' => array(
+        '#title' => t('Make sure that your page does not rely on JavaScript to function.'),
+      ),
+    ),
+
+    // Extras.
+    'extras' => array(
+      '#title' => t('Extras'),
+      'accessiblity_statement_generator' => array(
+        '#title' => t('Optional: Generate an accessibility statement using Nomensa\'s <a href="http://www.accessibilitystatementgenerator.com" title="Nomensa\'s Accessibility Statement Generator">Accessibility Statement Generator</a>.'),
+      ),
+      'nomensa_blog' => array(
+        '#title' => t('Optional: Subscribe to the <a href="http://www.nomensa.com/blog" title="Nomensa blog">Nomensa blog</a> and read our blog posts about accessiblity.')
+      ),
+    ),
+  );
+
+  return $definitions;
+}

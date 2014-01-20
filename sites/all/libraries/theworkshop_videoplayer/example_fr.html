@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>The Workshop accessible video player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="swfobject/swfobject.js" type="text/javascript"></script><!-- SWFObject javascript -->
+		<script src="videoplayer.js" type="text/javascript"></script><!-- Javascript file containing Video player functions -->
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	</head>
+	
+	<body onload="createVideoPlayer('video')"><!-- onload of HTML page - send div id of div to contain player -->
+		<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+
+		<div id="container">
+			<h1>The Workshop lecteur vidéo accessibles</h1>
+			<hr/>
+			<h2>Par exemple intégrer</h2>
+			
+			<p>Cette page décrit comment intégrer le lecteur vidéo Atelier Flash (v0.1.0.1) dans une page HTML.</p>
+			<p>Nous vous recommandons d'utiliser <a href="http://code.google.com/p/swfobject/" target="_new">SWFObject</a> embed et Flash Player version 10.0.115 ou supérieur.</p>
+			
+			<div id="help"><p><a href="help_fr.html">Aide Video Player</a> | <img src="images/union_jack.jpg" height="10" width="20" alt="British flag" /> <a href="example.html">English</a></p></div>
+		<div id="video">
+			<p>To view this content, you must have JavaScript enabled, and the latest version of the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.</p>
+		</div >
+		<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+			
+			/**
+			* id = is passed to the function and is the id of div that will contain the video player (in this case 'video')
+			*/
+			function createVideoPlayer(id)
+			{
+				//hide transcript div
+				toggleTranscript();
+				
+				//Dimenasions of the player
+				var playerwidth = 600; // change this to the width of your video
+				var playerheight = 337; // change this to the height of your video    				
+				
+				//Parameters
+				var params = {};
+				params.bgColor = "#000000";//background colour
+				params.allowFullScreen = true;//This must be true to allow full screen functionality
+				
+				//Flash vars for configuring the player
+				var flashvars = {};
+				flashvars.id = id; //set 'id' of flash for javascript communication, the 'id' of the DIV to contain the player
+				
+				//Media types
+				flashvars.mediaURL = "video/dummy_video.flv";	//FLV file [make sure the URL to the video is relative to the HTML page embedding the player]
+				
+				//Image to display
+				flashvars.imageURL = "assets/images/dummy_still.jpg"; //[optional]
+				
+				//Captions
+				flashvars.captionsURL = "assets/fr/captions/dummy_captions_fr.xml";//[optional]
+				
+				//Audio descriptions
+				flashvars.audioDescriptionURL = "assets/audio/dummy_audiodesc.mp3";	//[optional] ignnored if the mediaURL is mp3
+				
+				//language setting - point to the video_player.xml file containing all text for the player
+				flashvars.language = "fr/";	//folder in assets containing video_player.xml [optional]
+				
+				//
+				//video and image will be scaled to the dimensions supplied
+				swfobject.embedSWF("assets/videoplayer.swf", id, playerwidth , playerheight, "10.1", null, flashvars, params);
+				
+			}
+
+		</script>
+		<br />
+		<p>In the Video player asset folders see 'assets/fr' for the french translation of the text used in the video player</p>
+		<p>Please see the HTML code of this page to see a working example.</p>   
+
+		<p><a href="javascript:toggleTranscript();" id="viewTranscript"><span id="transcriptText">Show transcript</span></a></p>
+        <div id="transcriptTextAlt" style="display:none;">Hide transcript</div>
+		<div id="transcript" class="transcriptcontent" style="display:block;">
+			<p>
+			<strong>Transcript.</strong><br/>
+			[This really should be translated also...]<br/>
+			Clive: I’ve been growing giant pumpkins for about 30 years now.<br/>
+			Prof Sue Hartley: And have they been getting bigger every year.<br/>
+			Clive: Oh yes, with the seed selection they are getting bigger every year.<br/>
+			Prof Sue Hartley: So what are the problems with growing giant pumpkins?<br/>
+			Clive: Well they can explode.<br/>
+			Prof Sue Hartley: That sounds very messy.<br/>
+			Clive: Oh yes, I’ve had incidents myself, i watered them in the evening had a storm at night, and when I went back in the morning the pumpkin had exploded all over the garden.<br/>
+			Prof Sue Hartley: Sounds very dangerous.<br/>
+			Clive: Yes I believe they go off like a small grenade.<br/>
+			Prof Sue Hartley: But how big can pumpkins actually get Clive? What's the limit to the size of these pumpkins?<br/>
+			Clive: We just don't know, as far as I can see there’s no limit, I can see in less than 10 years time we could have pumpkins weighing up to two tonnes.<br/>
+			Prof Sue Hartley: Clive can certainly grow veg, so we've got here a giant marrow with some seeds inside. <br/>
+			So we can now try and get them out. Now hopefully this isn’t going to go off like a grenade. But we're going to get Alex here to chop it up for us. <br/>
+			Now I have to say before Alex starts, we've been trying to keep this marrow cool and fresh since October and I have to say I’m not entirely sure how successful we've been,	it might be rather messy, hence the aprons, and I’m going to hide behind the desk. You might want to duck you guys sitting near the front Let's see what happens. <br/>
+			Go for it guys. <br/>
+			Oh wow! <br/>
+			Thank you Alex.	<br/>
+			END.
+			</p>
+		</div>
+			
+			
+			
+	
+	</div>
+	</body>
+</html>

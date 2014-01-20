@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>The Workshop accessible video player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	</head>
+	
+	<body >
+		
+	<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+
+		<div id="container">
+			<h1>The Workshop accessible video player</h1>
+			<hr/>
+			<h2>JavaScript API</h2>
+			
+			<h3>Introduction</h3>
+			<hr/>
+			<p>To use Javascript with the videoplayer you must incluse the 'videoplayer.js' in the <code>&lt;head&gt;</code> of your HTML page.
+			<br/>
+			e.g. <pre>&lt;script src="videoplayer.js" type="text/javascript"&gt;&lt;/script&gt;</pre></p>
+			
+			<h3>Referencing the player</h3>
+			<hr/>
+			<p>When the videoplayer loads it will try to call the function <code>onPlayerInitiated</code> in 'videoplayer.js'. 
+			<br/>
+			The video player passes an 'id' to the function. This 'id' must be set in the embed of the player as a FlashVar. 
+			<br/>
+			e.g. <pre>flashvars.id = "video";	//set ID of flash for javascript communication</pre>
+			<br/>
+			Where the 'id' is the id of the div that will contain the video player.
+			<br/>
+			Once the video has loaded and the <code>onPlayerInitiated</code> has been called, you will be able to call the following javascript functions to control the video player.</p>
+			
+			<h3>API Methods</h3>
+			<hr/>
+			
+			
+			<p>
+				<strong>Change the video file</strong>
+				<br/>
+				<pre>changeVideo("new url")</pre>
+				a link to change the video would be <code>&lt;a href="Javascript:changeVideo("a new url")"&gt;Play&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+			
+			<p>
+				<strong>Change the caption file</strong>
+				<br/>
+				<pre>changeCaptions("new url")</pre>
+				a link to change the captions would be <code>&lt;a href="Javascript:changeCaptions("a new url")"&gt;Play&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+		
+			<p>
+				<strong>Change the Audio Description file</strong>
+				<br/>
+				<pre>changeAudioDescription("new url")</pre>
+				a link to change the audio description would be <code>&lt;a href="Javascript:changeAudioDescription("a new url")"&gt;Play&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+			
+			<p>
+				<strong>Change the poster image</strong>
+				<br/>
+				<pre>changeImage("new url")</pre>
+				a link to change the image would be <code>&lt;a href="Javascript:changeImage("a new url")"&gt;Play&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+			
+			
+			
+			<p>
+				<strong>Start playback</strong>
+				<br/>
+				<pre>play()</pre>
+				a link to start playback would be <code>&lt;a href="Javascript:play()"&gt;Play&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Pause playback</strong><br/>
+			<pre>pause()</pre>
+			<br/>
+			a link to stop playback would be <code>&lt;a href="Javascript:pause()"&gt;Pause&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Skip 2 seconds forward</strong><br/>
+			<pre>fastforward()</pre>
+			a link to fast forward would be <code>&lt;a href="Javascript:fastforward()"&gt;Fast Forward&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Skip 2 seconds back</strong><br/>
+			<pre>rewind()</pre>
+			a link to rewind would be <code>&lt;a href="Javascript:rewind()"&gt;Rewind&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Resart the video</strong><br/>
+			<pre>restart()</pre>
+			a link to restart would be <code>&lt;a href="Javascript:restart()"&gt;Restart&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Toggle Mute on/off</strong><br/>
+			<pre>togglemute()</pre>
+			a link to mute/unmute would be <code>&lt;a href="Javascript:togglemute()"&gt;Toggle Audio&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Increase Volume by 1</strong><br/>
+			<pre>volumeup()</pre>
+			a link to increase volume would be <code>&lt;a href="Javascript:volumeup()"&gt;Increase Volume&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Decrease Volume by 1</strong><br/>
+			<pre>volumedown()</pre>
+			a link to decrease volume would be <code>&lt;a href="Javascript:volumedown()"&gt;Decrease Volume&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Toggle Captions on/off</strong><br/>
+			<pre>togglecaptions()</pre>
+			a link to toggle captions would be <code>&lt;a href="Javascript:togglecaptions()"&gt;Toggle Captions&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Toggle shortcut screen on/off</strong><br/>
+			<pre>togglehelp()</pre>
+			a link to toggle the help page would be <code>&lt;a href="Javascript:togglehelp()"&gt;Toggle Help&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Toggle Audio Description on/off</strong><br/>
+			<pre>toggleaudiodescription()</pre>
+			a link to oggle audio description would be <code>&lt;a href="Javascript:toggleaudiodescription()"&gt;Toggle Audio Description&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Change the text size - cycles through the different sizes</strong><br/>
+			<pre>changetextsize()</pre>
+			a link to change the text size would be <code>&lt;a href="Javascript:changetextsize()"&gt;Change text size&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+			<p>
+			<strong>Change the text colour - cycles through the different colours</strong><br/>
+			<pre>changetextcolour()</pre>
+			a link to change the colour settings would be <code>&lt;a href="Javascript:changetextcolour()"&gt;Change text colour&lt;/a&gt;</code>
+				<br/><br/>
+			</p>
+
+		</p>
+			
+
+       </div>
+
+		
+	</body>
+</html>

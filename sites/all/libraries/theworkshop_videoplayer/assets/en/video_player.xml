@@ -1,0 +1,159 @@
+﻿<xliff version="1.0">
+	<file datatype="plaintext" original="tWVideoPlayer" source-language="en-US">
+		<head />
+		<body>
+			<!-- Button tooltips -->
+			<trans-unit id="001" resname="play_button_tt">
+				<source>Pause</source>
+			</trans-unit>
+			<trans-unit id="001" resname="pause_button_tt">
+				<source>Play</source>
+			</trans-unit>
+			<trans-unit id="001" resname="restart_button_tt">
+				<source>Restart</source>
+			</trans-unit>
+			<trans-unit id="001" resname="volume_button_tt">
+				<source>Adjust volume</source>
+			</trans-unit>
+			<trans-unit id="001" resname="scrub_button_tt">
+				<source>Scrub video</source>
+			</trans-unit>
+			<trans-unit id="001" resname="mute_on_button_tt">
+				<source>Unmute sound</source>
+			</trans-unit>
+			<trans-unit id="001" resname="mute_off_button_tt">
+				<source>Mute sound</source>
+			</trans-unit>
+			<trans-unit id="001" resname="captions_on_button_tt">
+				<source>Switch off captions</source>
+			</trans-unit>
+			<trans-unit id="001" resname="captions_off_button_tt">
+				<source>Switch on captions</source>
+			</trans-unit>
+			<trans-unit id="001" resname="text_size_button_tt">
+				<source>Change text size</source>
+			</trans-unit>
+			<trans-unit id="001" resname="text_colour_button_tt">
+				<source>Change colour settings</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcuts_on_button_tt">
+				<source>Hide shortcut screen</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcuts_off_button_tt">
+				<source>Show shortcut screen</source>
+			</trans-unit>
+			<trans-unit id="001" resname="fullscreen_on_button_tt">
+				<source>Normal screen mode</source>
+			</trans-unit>
+			<trans-unit id="001" resname="fullscreen_off_button_tt">
+				<source>Full screen mode</source>
+			</trans-unit>
+			<trans-unit id="001" resname="audiodesc_on_button_tt">
+				<source>Switch off audio description</source>
+			</trans-unit>
+			<trans-unit id="001" resname="audiodesc_off_button_tt">
+				<source>Switch on audio description</source>
+			</trans-unit>
+			
+				<!-- NON SCREEN READER MODE : Shortcut screen text -->
+			<trans-unit id="001" resname="shortcut_title">
+				<source>Shortcut keys:</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_play">
+				<source>Pause/Play</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_ffwd">
+				<source>Rewind</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_rwd">
+				<source>Fast forward</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_vol_up">
+				<source>Volume up</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_vol_dwn">
+				<source>Volume down</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_mute">
+				<source>Mute</source>
+			</trans-unit>
+			
+			<!-- SCREEN READER TEXT for video player. -->
+			
+			<!-- SCREEN READER MODE : Shortcut screen text NB. The numbers are the actual shortcut key for the button, these MUST stay as they are. 	-->
+			<trans-unit id="001" resname="sr_shortcut_title">
+				<source>Shortcut keys:</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_play">
+				<source>CTRL + ALT + 1,<br/>Pause/Play</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_ffwd">
+				<source>CTRL + ALT + 2,<br/>Rewind</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_rwd">
+				<source>CTRL + ALT + 3,<br/>Fast forward</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_vol_up">
+				<source>CTRL + ALT + 4,<br/>Volume up</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_vol_dwn">
+				<source>CTRL + ALT + 5,<br/>Volume down</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_mute">
+				<source>CTRL + ALT + 6,<br/>Mute</source>
+			</trans-unit>
+			
+			<!-- Name of video player -->
+			<trans-unit id="001" resname="sr_videoplayer">
+				<source>The Workshop accessible video player.</source>
+			</trans-unit>
+
+			<!-- Button names - USE PUNCTUATION -->
+			<trans-unit id="001" resname="sr_play_on">
+				<source>Play.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_play_off">
+				<source>Pause.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_restart_on">
+				<source>Restart.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_mute_on">
+				<source>Mute.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_mute_off">
+				<source>Un Mute.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_on">
+				<source>Show Shortcut keys.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_off">
+				<source>Hide Shortcut keys.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_captions_on">
+				<source>Show Captions.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_captions_off">
+				<source>Hide Captions.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_textsize">
+				<source>Cycle text size.</source>
+			</trans-unit>	
+			<trans-unit id="001" resname="sr_textcolour">
+				<source>Cycle colour settings.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_audiodesc_on">
+				<source>Switch on Audio Description.</source>
+			</trans-unit>	
+			<trans-unit id="001" resname="sr_audiodesc_off">
+				<source>Switch off Audio Description.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_fullscreen_on">
+				<source>Watch in Full screen.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_fullscreen_off">
+				<source>Watch in normal screen.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

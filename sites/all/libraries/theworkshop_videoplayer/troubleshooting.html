@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>The Workshop accessible video player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="en" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	</head>
+	
+	<body >
+		
+	<div class="logoholder"><a href="http://www.theworkshop.co.uk"><img src="images/wslogo.gif" alt="The Workshop" border="0" /></a></div>
+
+		<div id="container">
+			<h1>The Workshop accessible video player</h1>
+			<hr/>
+			<h2>Troubleshooting</h3>
+			
+			<h3>Step 1: Is the player visible on your page?</h3>
+			<p>To check this, right click over the area where the player should be on you page. If you get a menu telling you it is Flash then the video player is being displayed.</p>
+			<p>NO</p>
+				<ul>
+					<li>Check the URL to the video player swf</li>
+					<li>Check that there are no JavaScript errors</li>
+				</ul>
+			
+			<p>YES</p>
+				<ul>
+					<li>Got to the Step 2</li>
+				</ul>
+				
+			<h3>Step 2: Can you see the video player controls?</h3>
+			
+			<p>If the player has loaded and initialised correctly then you will be able to see the video player controls</p>
+			<p>NO</p>
+				<ul>
+					<li>Check the video player XML assets (videoplayer_styles.xml and video_player.xml) are all present. Use a debugger such as <a href="http://getfirebug.com/">Firebug</a> to see if you have any 404 errors</li>
+					<li>If you are using a <code>lang</code> setting, check the URLs are correct</li>
+			</ul>
+				
+			<p>YES</p>
+			<ul>
+				<li>Go to Step 3</li>
+			</ul>
+		
+			<h3>Step 3: Does the media play?</h3>
+			
+			<p>If the player has not loaded the media correctly you will see a spinning circle in the centre of the player. This means that the player is still trying to load the media file.</p>
+			<p>NO</p>
+				<ul>
+					<li>Check the URLs to the media file. Use a debugger such as <a href="http://getfirebug.com/">Firebug</a> to see if you have any 404 errors</li>
+					<li>Check that the media is encoded in the correct format, flv, mp4, mp3</li>
+				</ul>
+
+			<p>YES</p>
+				<ul>
+					<li>You are up and running</li>
+				</ul>
+				
+			<br/>
+			<hr/>
+				
+			<h3>Captions/audio description not working?</h3>
+			
+			<p>If the player has not loaded a captions or audio description file correctly the player will not stop working, it will fail silently.</p>
+			
+				<ul>
+					<li>Check the URLs to the file. Use a debugger such as <a href="http://getfirebug.com/">Firebug</a> to see if you have any 404 errors</li>
+					<li>Check there is no error in the caption XML file. Open the XML file in a browser and it will highlight any errors</li>
+				</ul>
+
+			<h3>Poster image not showing?</h3>
+			
+			<p>If the player is not showing the poster image the player will not stop working, it will fail silently.</p>
+			
+				<ul>
+					<li>Check the URLs to the file. Use a debugger such as <a href="http://getfirebug.com/">Firebug</a> to see if you have any 404 errors</li>
+				</ul>
+				
+		</script>
+       </div>
+
+		
+	</body>
+</html>

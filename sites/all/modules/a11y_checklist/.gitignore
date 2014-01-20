@@ -1,0 +1,4 @@
+# Ignore files created by Eclipse, Aptana, NetBeans, and Sublime Text 2
+.project
+.settings
+*.sublime*

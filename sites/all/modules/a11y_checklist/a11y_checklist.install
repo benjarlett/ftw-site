@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Accessibility Checklist
+ * module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function a11y_checklist_uninstall() {
+  variable_del('checklistapi_checklist_a11y_checklist');
+}

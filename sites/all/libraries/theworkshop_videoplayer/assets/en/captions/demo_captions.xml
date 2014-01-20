@@ -1,0 +1,42 @@
+﻿<tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1" xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling" >
+	<head>
+		<styling>
+			<!-- default style : the id should always be 'tts:default' -->
+			<style id="tts:default" tts:color="white" tts:fontFamily="Verdana" tts:fontSize="14px" tts:fontWeight="normal" tts:textAlign="center"  />
+			<!-- second speaker style : the id can be anything -->
+			<style id="tts:speaker2" tts:color="cyan" tag="p"/>
+		</styling>
+	</head>
+	<body>
+		<div xml:lang="en">			
+			<p begin="00:00:00.20" end="00:00:04.00" style="tts:speaker2">&gt;&gt; Clive: I’ve been growing giant pumpkins for about 30 years now.</p>
+			<p begin="00:00:04.01" end="00:00:06.00">&gt;&gt; Prof Sue Hartley: And have they been getting bigger every year.</p>
+			<p begin="00:00:06.01" end="00:00:10.00" style="tts:speaker2">&gt;&gt; Oh yes, with the seed selection they are getting bigger every year.</p>
+			<p begin="00:00:11.00" end="00:00:13.00">&gt;&gt; So what are the problems with growing giant pumpkins?</p>
+			<p begin="00:00:13.01" end="00:00:15.00" style="tts:speaker2">&gt;&gt; Well they can explode.</p>
+			<p begin="00:00:15.05" end="00:00:17.00">&gt;&gt; That sounds very messy.</p>
+			<p begin="00:00:18.00" end="00:00:25.00" style="tts:speaker2">&gt;&gt; Oh yes, I’ve had incidents myself, i watered them in the evening had a storm at night,</p>
+			<p begin="00:00:25.01" end="00:00:33.00" style="tts:speaker2">and when I went back in the morning the pumpkin had exploded all over the garden.</p>
+			<p begin="00:00:33.01" end="00:00:35.00">&gt;&gt; Sounds very dangerous.</p>
+			<p begin="00:00:35.01" end="00:00:37.00" style="tts:speaker2">&gt;&gt; Yes I believe they go off like a small grenade.</p>
+			<p begin="00:00:37.01" end="00:00:40.00">&gt;&gt; But how big can pumpkins actually get Clive?</p>
+			<p begin="00:00:40.01" end="00:00:43.00">What's the limit to the size of these pumpkins?</p>
+			<p begin="00:00:43.01" end="00:00:47.00" style="tts:speaker2">&gt;&gt; We just don't know, as far as I can see there’s no limit,</p>
+			<p begin="00:00:47.01" end="00:00:53.00" style="tts:speaker2">I can see in less than 10 years time we could have pumpkins weighing up to two tonnes.</p>
+			<p begin="00:00:55.05" end="00:01:02.00">&gt;&gt; Clive can certainly grow veg, so we've got here a giant marrow with some seeds inside.</p>
+			<p begin="00:01:06.00" end="00:01:09.00">So we can now try and get them out.</p>
+			<p begin="00:01:10.00" end="00:01:13.00">Now hopefully this isn’t going to go off like a grenade. </p>
+			<p begin="00:01:14.00" end="00:01:17.00">But we're going to get Alex here to chop it up for us. </p>
+			<p begin="00:01:20.05" end="00:01:23.00">Now I have to say before Alex starts,</p>
+			<p begin="00:01:24.00" end="00:01:29.00">we've been trying to keep this marrow cool and fresh since October</p>
+			<p begin="00:01:30.00" end="00:01:35.00">and I have to say I’m not entirely sure how successful we've been,</p>
+			<p begin="00:01:36.00" end="00:01:43.00">it might be rather messy, hence the aprons, and I’m going to hide behind the desk.</p>
+			<p begin="00:01:43.05" end="00:01:47.00">You might want to duck you guys sitting near the front.</p>
+			<p begin="00:01:48.00" end="00:01:50.00">Let's see what happens.</p>
+			<p begin="00:01:52.00" end="00:01:54.00">Go for it guys.</p>
+			<p begin="00:01:55.00" end="00:02:02.00">[Chain saw sound]</p>
+			<p begin="00:02:03.00" end="00:02:05.00">Oh wow! Thank you Alex.</p>
+			<p begin="00:02:06.00" end="00:02:10.00">[Applause]</p>
+		</div>
+	</body>
+</tt>

@@ -1,0 +1,13 @@
+name = Accessibility (a11y) Checklist
+description = An accessibility checklist for Drupal.
+core = 7.x
+package = Accessibility
+dependencies[] = checklistapi
+configure = admin/config/accessibility/accessibility-checklist
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "a11y_checklist"
+datestamp = "1380552068"
+

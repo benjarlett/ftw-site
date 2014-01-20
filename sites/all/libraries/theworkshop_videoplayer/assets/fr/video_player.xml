@@ -1,0 +1,160 @@
+﻿<xliff version="1.0">
+	<file datatype="plaintext" original="tWVideoPlayer" source-language="en-US">
+		<head />
+		<body>
+			<!-- Button tool tips -->
+			<trans-unit id="001" resname="play_button_tt">
+				<source>Pause</source>
+			</trans-unit>
+			<trans-unit id="001" resname="pause_button_tt">
+				<source>Écouter</source>
+			</trans-unit>
+			<trans-unit id="001" resname="restart_button_tt">
+				<source>Redémarrez</source>
+			</trans-unit>
+			<trans-unit id="001" resname="volume_button_tt">
+				<source>Régler le volume</source>
+			</trans-unit>
+			<trans-unit id="001" resname="scrub_button_tt">
+				<source>Gommage vidéo</source>
+			</trans-unit>
+			<trans-unit id="001" resname="mute_on_button_tt">
+				<source>Activer son</source>
+			</trans-unit>
+			<trans-unit id="001" resname="mute_off_button_tt">
+				<source>Son muet</source>
+			</trans-unit>
+			<trans-unit id="001" resname="captions_on_button_tt">
+				<source>Eteindre légendes</source>
+			</trans-unit>
+			<trans-unit id="001" resname="captions_off_button_tt">
+				<source>Mettre des légendes</source>
+			</trans-unit>
+			<trans-unit id="001" resname="text_size_button_tt">
+				<source>Changer la taille du texte</source>
+			</trans-unit>
+			<trans-unit id="001" resname="text_colour_button_tt">
+				<source>Modifier les paramètres de couleur</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcuts_on_button_tt">
+				<source>Écran de raccourcis masquer</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcuts_off_button_tt">
+				<source>Afficher l'écran de raccourci</source>
+			</trans-unit>
+			<trans-unit id="001" resname="fullscreen_on_button_tt">
+				<source>Mode d'écran normal</source>
+			</trans-unit>
+			<trans-unit id="001" resname="fullscreen_off_button_tt">
+				<source>Le mode plein écran</source>
+			</trans-unit>
+			<trans-unit id="001" resname="audiodesc_on_button_tt">
+				<source>Éteignez description audio</source>
+			</trans-unit>
+			<trans-unit id="001" resname="audiodesc_off_button_tt">
+				<source>Switch sur la description audio</source>
+			</trans-unit>
+			
+			<!-- Shortcut screen text NB. The numbers are the actual shortcut key for the button, this MUST stay as they are. 	-->
+			<trans-unit id="001" resname="shortcut_title">
+				<source>Les touches de raccourci:</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_play">
+				<source>Pause/Écouter</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_ffwd">
+				<source>Rembobiner</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_rwd">
+				<source>Avance rapide</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_vol_up">
+				<source>Augmenter le volume</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_vol_dwn">
+				<source>Baisser le volume</source>
+			</trans-unit>
+			<trans-unit id="001" resname="shortcut_mute">
+				<source>Muet</source>
+			</trans-unit>
+			
+			<!-- SCREEN READER TEXT for video player. -->
+			
+			
+			<!-- SCREEN READER MODE : Shortcut screen text NB. The numbers are the actual shortcut key for the button, these MUST stay as they are. 	-->
+			<trans-unit id="001" resname="sr_shortcut_title">
+				<source>Shortcut keys:</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_play">
+				<source>CTRL + ALT + 1,<br/>Pause/Play</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_ffwd">
+				<source>CTRL + ALT + 2,<br/>Rewind</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_rwd">
+				<source>CTRL + ALT + 3,<br/>Fast forward</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_vol_up">
+				<source>CTRL + ALT + 4,<br/>Volume up</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_vol_dwn">
+				<source>CTRL + ALT + 5,<br/>Volume down</source>
+			</trans-unit>
+			<trans-unit id="001" resname="sr_shortcut_mute">
+				<source>CTRL + ALT + 6,<br/>Mute</source>
+			</trans-unit>
+			
+			<!-- Name of video player -->
+			<trans-unit id="001" resname="srn_videoplayer">
+				<source>The Workshop lecteur vidéo accessible.</source>
+			</trans-unit>
+
+			<!-- Button names - USE PUNCTUATION -->
+			<trans-unit id="001" resname="srn_play_on">
+				<source>Écouter.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_play_off">
+				<source>Pause.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_restart_on">
+				<source>Redémarrez.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_mute_on">
+				<source>Muet.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_mute_off">
+				<source>Activer son.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_shortcut_on">
+				<source>Afficher les touches de raccourci.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_shortcut_off">
+				<source>Masquer les touches de raccourci.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_captions_on">
+				<source>Afficher les légendes.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_captions_off">
+				<source>Légendes Masquer.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_textsize">
+				<source>Changer la taille du texte.</source>
+			</trans-unit>	
+			<trans-unit id="001" resname="srn_textcolour">
+				<source>Modifier les paramètres de couleur.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_audiodesc_on">
+				<source>Commencer la description sonore.</source>
+			</trans-unit>	
+			<trans-unit id="001" resname="srn_audiodesc_off">
+				<source>Démarrer une description sonore.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_fullscreen_on">
+				<source>Regarder en plein écran.</source>
+			</trans-unit>
+			<trans-unit id="001" resname="srn_fullscreen_off">
+				<source>Regarder dans l'écran normal.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

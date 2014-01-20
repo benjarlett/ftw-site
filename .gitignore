@@ -35,3 +35,9 @@ xmlrpc.php
 /profiles
 /scripts
 /themes
+
+# Ignore Robs module
+/sites/all/modules/ftw-module
+
+# Ignore Ben’s theme
+/sites/all/themes/ftw
