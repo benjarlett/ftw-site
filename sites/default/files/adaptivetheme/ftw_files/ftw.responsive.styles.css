@@ -1,3 +1,4 @@
+/*bens variables*/
 /*
  * responsive.custom.css is for custom media queries that are not set via the
  * theme settings, such as cascading media queries.
@@ -52,6 +53,7 @@
 
 
 @media only screen and (max-width:320px) {
+/*bens variables*/
 /*
  *   Important Information about this CSS File
  *
@@ -62,42 +64,53 @@
  * - Read the _README file in this directory, it contains useful help and other information.
  */
 /* Increase the default font size on small devices */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000316}}
 html {
   font-size: 112.5%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000319}}
 #toplines {
   border: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000322}}
 #skip-link {
   margin-left: 0px;
   text-align: center;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000327}}
 #skip-link ul li {
   display: inline-block;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000332}}
 #header {
   background: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000335}}
 #header #branding #logo a {
   top: 60px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000338}}
 #header #branding #name-and-slogan {
   top: 182px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000342}}
+.sidebar .region-inner {
+  margin: 1em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.portrait\.scss}line{font-family:\0000347}}
+footer {
+  padding: 1em 0;
 }
 
 }
 @media only screen and (min-width:321px) and (max-width:480px) {
+/*bens variables*/
 /*
  *   Important Information about this CSS File
  *
@@ -108,42 +121,83 @@ html {
  * - Read the _README file in this directory, it contains useful help and other information.
  */
 /* Increase the body font size on small devices */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000316}}
 html {
   font-size: 112.5%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000319}}
 #toplines {
   border: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000322}}
 #skip-link {
   margin-left: 0px;
   text-align: center;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000327}}
 #skip-link ul li {
   display: inline-block;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000332}}
 #header {
   background: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000333}}
+#header .inner {
+  background: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000338}}
 #header #branding #logo a {
   top: 60px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000341}}
 #header #branding #name-and-slogan {
   top: 182px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000345}}
+.region-sidebar-first .region-inner {
+  margin: 0 0.5em 0 1em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000348}}
+.region-sidebar-second .region-inner {
+  margin: 0 1em 0 0.5em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000352}}
+.region-sidebar-second .block {
+  width: auto;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000355}}
+#content-column {
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000357}}
+#content-column .content-inner {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000363}}
+.region-sidebar-first, .region-sidebar-second {
+  margin-top: 0px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.smartphone\.landscape\.scss}line{font-family:\0000366}}
+footer {
+  padding: 1em 0;
+}
+
 }
 @media only screen and (min-width:481px) and (max-width:768px) {
+/*bens variables*/
 /*
  *   Important Information about this CSS File
  *
@@ -154,24 +208,60 @@ html {
  * - Read the _README file in this directory, it contains useful help and other information.
  */
 /* Increase the body font size on small devices */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000316}}
 html {
   font-size: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000319}}
-#skip-link {
-  margin-left: 185px;
-  text-align: left;
-  width: 130px;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000321}}
+#header .inner {
+  background: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000324}}
-#skip-link ul li {
-  display: block;
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000325}}
+.region-sidebar-first .region-inner {
+  margin: 0 0.5em 0 1em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000328}}
+.region-sidebar-second .region-inner {
+  margin: 0 1em 0 0.5em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000331}}
+.region-sidebar-second .block {
+  width: auto;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000334}}
+#content-column {
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000336}}
+#content-column .content-inner {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000342}}
+.region-sidebar-first, .region-sidebar-second {
+  margin-top: 0px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000345}}
+footer {
+  padding: 1em 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.portrait\.scss}line{font-family:\0000349}}
+#menu-bar #block-superfish-1 {
+  font-size: 1.2em;
 }
 
 }
 @media only screen and (min-width:769px) and (max-width:1024px) {
+/*bens variables*/
 /*
  *   Important Information about this CSS File
  *
@@ -181,9 +271,29 @@ html {
  *
  * - Read the _README file in this directory, it contains useful help and other information.
  */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.landscape\.scss}line{font-family:\0000317}}
+.no-sidebars .container {
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.landscape\.scss}line{font-family:\0000319}}
+.no-sidebars .container #header {
+  text-align: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.landscape\.scss}line{font-family:\0000322}}
+.no-sidebars .container #columns {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.tablet\.landscape\.scss}line{font-family:\0000330}}
+#menu-bar #block-superfish-1 {
+  font-size: 1.2em;
+}
 
 }
 @media only screen and (min-width:1025px) {
+/*bens variables*/
 /*
  *   Important Information about this CSS File
  *
@@ -193,14 +303,26 @@ html {
  *
  * - Read the _README file in this directory, it contains useful help and other information.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000314}}
-#page .container {
-  max-width: none;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000314}}
+#header .inner, #menu-bar, #columns, #footer .region {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/ftwV1\/ftwv1\.net\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000317}}
-#header #branding, #header .region, #menu-bar nav, #columns {
-  max-width: 1140px;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000320}}
+.no-sidebars .container {
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000322}}
+.no-sidebars .container #header {
+  text-align: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ben\/Sites\/FTW\/ftw-site\/sites\/all\/themes\/ftw\/sass\/responsive\.desktop\.scss}line{font-family:\0000325}}
+.no-sidebars .container #columns {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
 }
 
 }
