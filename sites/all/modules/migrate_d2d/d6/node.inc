@@ -34,15 +34,9 @@ class DrupalNode6Migration extends DrupalNodeMigration {
     $this->addFieldMapping('language', 'language')
          ->defaultValue($this->defaultLanguage);
 
-    if (field_info_instance('node', 'body', $this->destinationType)) {
-      $this->addFieldMapping('body:summary', 'teaser');
-      $this->addFieldMapping('body:format', 'format')
-           ->callbacks(array($this, 'mapFormat'));
-    }
-    else {
-      $this->addUnmigratedSources(array('teaser', 'format'));
-    }
-
+    $this->addFieldMapping('body:summary', 'teaser');
+    $this->addFieldMapping('body:format', 'format')
+         ->callbacks(array($this, 'mapFormat'));
     $this->addFieldMapping(NULL, 'moderate');
     /** @todo Prevent stub creation when tnid == 0
     $this->addFieldMapping('tnid', 'tnid', FALSE)
@@ -65,8 +59,8 @@ class DrupalNode6Migration extends DrupalNodeMigration {
              ->fields('n', array('nid', 'vid', 'language', 'title',
                  'uid', 'status', 'created', 'changed', 'comment', 'promote',
                  'moderate', 'sticky', 'tnid', 'translate'))
-             ->condition('n.type', $this->sourceType)
-             ->orderBy('n.changed');
+             ->condition('type', $this->sourceType)
+             ->orderBy('changed');
     $query->innerJoin('node_revisions', 'nr', 'n.vid=nr.vid');
     $query->fields('nr', array('body', 'teaser', 'format'));
     // Pick up simple CCK fields

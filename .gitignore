@@ -7,3 +7,6 @@ sites/*/settings.php
 
 # Ignore Ben’s theme
 /sites/all/themes/ftw
+
+# Ignore Ben’s features
+/sites/all/modules/ftw-features

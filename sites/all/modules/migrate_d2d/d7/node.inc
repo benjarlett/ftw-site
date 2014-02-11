@@ -14,24 +14,15 @@ class DrupalNode7Migration extends DrupalNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
 
-    // Remove fields no longer relevent in D7 (now part of the body field).
-    unset($this->sourceFields['format']);
-    unset($this->sourceFields['teaser']);
-
     $this->source = new MigrateSourceSQL($this->query(), $this->sourceFields, NULL,
       $this->sourceOptions);
 
     $this->addFieldMapping('language', 'language')
          ->defaultValue($this->defaultLanguage);
 
-    if (field_info_instance('node', 'body', $this->destinationType)) {
-      $this->addFieldMapping('body:summary', 'body:summary');
-      $this->addFieldMapping('body:format', 'body:format')
-           ->callbacks(array($this, 'mapFormat'));
-    }
-    else {
-      $this->addUnmigratedSources(array('body:summary', 'body:format'));
-    }
+    $this->addFieldMapping('body:summary', 'body:summary');
+    $this->addFieldMapping('body:format', 'body:format')
+         ->callbacks(array($this, 'mapFormat'));
 
     /** @todo Prevent stub creation when tnid == 0
     $this->addFieldMapping('tnid', 'tnid', FALSE)
@@ -55,8 +46,8 @@ class DrupalNode7Migration extends DrupalNodeMigration {
              ->fields('n', array('nid', 'vid', 'language', 'title', 'uid',
                'status', 'created', 'changed', 'comment', 'promote', 'sticky',
                'tnid', 'translate'))
-             ->condition('n.type', $this->sourceType)
-             ->orderBy('n.changed');
+             ->condition('type', $this->sourceType)
+             ->orderBy('changed');
     return $query;
   }
 }
