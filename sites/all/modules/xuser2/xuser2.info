@@ -1,0 +1,5 @@
+; $Id$
+name = "xuser2 module"
+description = "Module for extending the user form"
+core = 7.x
+version = "7.x"

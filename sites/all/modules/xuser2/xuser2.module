@@ -1,0 +1,1070 @@
+<?php
+function xuser2_menu() {
+  $items = array();
+  $items['report-website'] = array( //this creates a URL that will call this form at "examples/form-example"
+    'title' => 'Report Website Form', //page title
+    'description' => 'A form to submit urls.',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('report_form'), //put the name of the form here
+    'access callback' => TRUE
+  );
+  $items['frame/report'] = array(
+  	'page callback' => 'drupal_get_form',
+  	'access arguments' => array('access content'),
+        'page arguments' => array('report_form'),
+        'access callback' => TRUE
+  );
+  $items['report'] = array( //this creates a URL that will call this form at "examples/form-example"
+    'title' => 'Report Website Form', //page title
+    'description' => 'A form to submit urls.',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('report_form'), //put the name of the form here
+    'access callback' => TRUE
+  );
+  $items['dashboard/reports/waiting'] = array(
+      'title' => t('Browse new reports'),
+      'page callback' => 'report_all',
+      'access arguments' => array('manage reports'),
+    'description' => t('Report all'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dashboard/report/%/accept'] = array(
+      'title' => t('Accept report'),
+      'access arguments' => array('manage reports'),
+      'page callback' => 'build_report_accept_form',
+      'page arguments' => array(2),
+      'type' => MENU_CALLBACK,
+  );
+   $items['dashboard/report/%/close'] = array(
+      'title' => t('Close report'),
+      'access arguments' => array('manage reports'),
+      'page callback' => 'build_report_close_form',
+      'page arguments' => array(2),
+      'type' => MENU_CALLBACK,
+  );
+  $items['dashboard/report/%/relist'] = array(
+  	'title' => t('Relist report'),
+  	'access arguments' => array('manage reports'),
+  	'page callback' => 'build_report_relist_form',
+  	'page arguments' => array(2),
+  	'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+function xuser2_mail($key, &$message, $params) {
+  if (isset($params['subject'])) {
+    $message['subject'] = $params['subject'];
+  }
+  if (isset($params['body'])) {
+    $message['body'][] = $params['body'];
+  }
+  if (isset($params['headers']) && is_array($params['headers'])) {  
+    $message['headers'] += $params['headers'];
+  }
+ 
+  // You should really have hook_mail() doing most of the formatting,
+  // rather than pass in a complete $body or a $subject from drupal_mail(). 
+  // To accomplish that, you'd branch this formatting based on the value of
+  // $key sent with drupal_mail(), and using code like this:
+  // switch ($key) {
+  //  case 'key1':
+  //    // do something specific for mails of type key1
+  //    break;     
+  //  case 'key2':
+  //    // do something specific for mails of type key2
+  //    break;
+  // }
+ 
+  // That's it - You don't do anything in your hook_mail() to actually
+  // send the mail, that is taken care of by the mail system automatically.
+}
+function xuser2_mail_send($module,$key,$to_email,$language,$message,$from) {
+  // All system mails need to specify the module and template key (mirrored from
+  // hook_mail()) that the message they want to send comes from.
+  //$module = 'email_example';
+  $key = 'contact_message';
+
+  // "params" loads in additional context for email content completion in
+  // hook_mail(). In this case, we want to pass in the values the user entered
+  // into the form, which include the message body in $form_values['message'].
+  $params = $message;
+
+  // The language of the e-mail. This will one of three values:
+  // * user_preferred_language(): Used for sending mail to a particular website
+  //   user, so that the mail appears in their preferred language.
+  // * global $language: Used when sending a mail back to the user currently
+  //   viewing the site. This will send it in the language they're currently
+  //   using.
+  // * language_default(): Used when sending mail to a pre-existing, 'neutral'
+  //   address, such as the system e-mail address, or when you're unsure of the
+  //   language preferences of the intended recipient.
+  //
+  // Since in our case, we are sending a message to a random e-mail address that
+  // is not necessarily tied to a user account, we will use the site's default
+  // language.
+  $language = $language;
+
+  // Whether or not to automatically send the mail when drupal_mail() is
+  // called. This defaults to TRUE, and is normally what you want unless you
+  // need to do additional processing before drupal_mail_send() is called.
+  $send = TRUE;
+  // Send the mail, and check for success. Note that this does not guarantee
+  // message delivery; only that there were no PHP-related issues encountered
+  // while sending.
+  $result = drupal_mail($module, $key, $to_email, $language, $params, $from, $send);
+  if ($result['result'] == TRUE) {
+    drupal_set_message(t('Your message has been sent.'));
+  }
+  else {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  }
+
+}
+function xuser2_block_info() {
+  $blocks = array();
+  $blocks['counters'] = array(
+    'info' => t('Counters'),
+  );
+ 
+  return $blocks;
+}
+function xuser2_block_view($delta='') {
+  $block = array();
+ 
+  switch($delta) {
+    case 'counters' :
+      $block['subject'] = '';
+      $block['content'] = build_block_counter();
+      break;
+  }
+ 
+  return $block;
+}
+function report_form($form,&$form_state) {
+	global $user;
+	drupal_add_js(drupal_get_path('module', 'xuser2') . '/js/report-form.js');
+	
+	$path_str = drupal_get_path_alias($_GET["q"]);
+	$path = explode('/',$path_str);
+	if($path[0] == 'frame') {
+		$frame = TRUE;
+		$form_state['storage']['frame'] = 1;
+	} else {
+		$frame = FALSE;
+	}
+	
+	$default_id = '';
+	$default_mail = '';
+	$default_url = 'http://';
+	
+	
+	if($user->uid > 0) {
+		$default_id = $user->uid;
+		$default_mail = $user->mail;
+	}
+	
+	if($frame) {
+		drupal_add_js(drupal_get_path('module', 'xuser') . '/js/framereportformfocus.js');
+		//watchdog('dev', print_r($_GET, TRUE));
+		if(isset($_GET['url']))	$default_url = urldecode($_GET['url']);	
+		if(isset($_GET['mail']) && $_GET['mail'] != '' && $_GET['mail'] != 'test@test.com') $default_mail = urldecode($_GET['mail']);
+		
+		$url_weight = 2;
+		$body_weight = 1;
+		$mail_weight = 3;
+		$submit_weight = 4;
+	} else {
+		$url_weight = 1;
+		$body_weight = 2;
+		$mail_weight = 3;
+		$submit_weight = 4;
+	}
+	
+	if(($default_id == 0 || $default_id == '') && valid_email_address($default_mail)) {
+		$row = db_fetch_object(db_query("SELECT uid FROM users WHERE mail = '".$default_mail."' LIMIT 1"));
+		//watchdog('dev', print_r($row, TRUE));
+		if($row->uid) {
+			$default_id = $row->uid;
+		}
+	}
+	
+	$form['field_report_user_id'] = array(
+		'#type' => 'hidden',
+		'#value' => $default_id,
+	);
+	$form['field_report_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('What is the website?'),
+		//'#prefix' => ($frame) ? '' : help_button('help-field_report_url'),
+		'#default_value' => $default_url,
+		'#required' => TRUE,
+		'#size' => 40,
+		'#weight' => $url_weight,
+	);
+	$form['field_report_body'] = array(
+		'#type' => 'textarea',
+		'#title' => ($frame) ? t('What is the accessibility issue?') : t('What is the issue?'),
+		//'#prefix' => ($frame) ? '' : help_button('help-field_report_body'),
+		'#default_value' => '',
+		'#required' => TRUE,
+		'#cols' => 32,
+		'#weight' => $body_weight,
+	);
+	if($frame == FALSE && $default_mail != '') {
+		$form['field_report_mail'] = array(
+			'#type' => 'hidden',
+			'#default_value' => $default_mail,
+		);
+	} else {
+		$form['field_report_mail'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Email'),
+			'#description' => t('It may be useful if we need further information.'),
+			'#default_value' => $default_mail,
+            '#required' => TRUE,
+			'#size' => 40,
+			'#weight' => $mail_weight,
+		);
+	}
+	$form['details'] = array(
+		'#type' => 'hidden',
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Submit'),
+		'#weight' => $submit_weight,
+  	);
+  	
+  	if($frame) {
+		$form['#redirect'] = 'frame/thanks';
+  	}
+  	//watchdog('dev', '<pre>'.print_r($form, TRUE).'</pre>');		
+	
+	return $form;
+}
+function report_form_validate($form, &$form_state) {
+    $status = '';
+    
+	if ($form_state['input']['field_report_url'] == 'http://') {
+		form_set_error('', t('What is the website? field is required.'));
+	  }/*
+	  if ($form_state['values']['field_body'] == '') {
+		form_set_error('', t('You must input an accessabiltiy issue.'));
+	  }*/
+
+    $url_match =  preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|ftps:\/\/|)?[a-z0-9_\-]+[a-z0-9_\-\.]+\.[a-z]{2,4}(\/+[a-z0-9_\.\-\/]*)?$/i",$form_state['values']['field_report_url']);
+
+    if ($url_match == 0) {
+        form_set_error('', t('Please enter a valid website address.'));
+    }
+	if($form_state['values']['field_report_mail'] != '' && !valid_email_address($form_state['values']['field_report_mail'])) {
+		form_set_error('', t('The email address is not valid'));
+	}
+    
+    if ($form_state['input']['field_report_mail'] != '') {
+        $mail = $form_state['input']['field_report_mail'];
+        $status = db_query("SELECT status FROM users WHERE mail = :mail", array(":mail" => $mail))->fetchField(); 
+        if ($status == '0') {
+            form_set_error('', t('Sorry, But you have been blocked from reporting to Fix the Web. If you believe this is a mistake, please get in <a href="http://www.fixtheweb.net/contact">contact</a> and we will rectify the situation.'));
+            return false;
+        }
+    }
+}
+function report_form_submit($form, &$form_state) {
+    global $user;
+    $uid_res = '';
+	//watchdog('dev', print_r($form_state['values'], TRUE));
+
+    $node = new stdClass();
+    $node->type     = 'report';
+    $node->uid      = 0;
+    $node->language = 'und';
+    //die($form_state['input']['field_report_body']);
+    $node->title    =  $form_state['input']['field_report_url'];
+    $node->field_report_url[$node->language][0]['value'] = $form_state['input']['field_report_url'];
+    $node->field_accessibility_issue[$node->language][0]['value']     = $form_state['input']['field_report_body'];
+    $uid = $form_state['input']['field_report_user_id'];
+    //die($uid);
+    $mail = $form_state['input']['field_report_mail'];
+	
+    if($uid == '') {
+            if($mail != '') {
+        $uid_res = db_query("SELECT uid FROM users WHERE mail = :mail limit 1", array(":mail" => $mail))->fetchField();
+                    //watchdog('dev', print_r($row, TRUE));
+                    if($uid_res) {
+                            $uid = $uid_res;
+                    }
+            }
+    }
+
+    if($mail == '') {
+            if($uid > 0) {
+                    $mail_res = db_query("SELECT mail FROM users WHERE uid = :uid limit 1", array(":uid" => $uid))->fetchField();
+                    //watchdog('dev', print_r($row, TRUE));
+                    if($mail_res) {
+                            $mail = $mail_res;
+                    }
+            }
+    }
+    $node->field_report_user_id['und'][0]['value'] = $uid;
+    //$node->field_mail['und'][$node->language][0]['email'] = $mail;
+
+    if(isset($form_state['input']['details']) && $form_state['input']['details'] != '') {
+            $node->field_report_browser_details[$node->language][0]['value'] = $form_state['input']['details'];
+    }
+
+    if(isset($form_state['storage']['frame'])) {
+            $node->field_report_source[$node->language][0]['value'] = 'toolbar';
+    } else {
+            $node->field_report_source[$node->language][0]['value'] = 'web form';
+    }
+
+    //watchdog('dev', '<pre>'.print_r($node, TRUE).'</pre>');
+	
+    if(!isset($form_state['storage']['frame']) && $uid == '') {
+            $_SESSION['reportstorage'] = $node;
+            unset($form_state['storage']);
+
+            drupal_goto('register/reporter');
+    } else {
+        if($node = node_submit($node)) {
+
+        node_save($node);
+        $nid = $node->nid;
+        db_insert('ftw_node_info') // Table name no longer needs {}
+            ->fields(array(
+              'nid' => $nid,
+              'status' => 0,
+            ))
+            ->execute();
+                    drupal_set_message('Your submission has been saved.');
+                    unset($form_state['storage']);
+            } else {
+                    drupal_set_message('Your submission has not been saved. Please contact us if this problem continues.');
+            }
+    }
+}
+function report_all() {
+     //update_tweets();    //grab new tweets
+    
+    //display
+    $output = '';
+    //$view_args = array();
+    //  $display_id = 'block_2';
+    //  $view = views_get_view('reports');
+    //if (!empty($view)) {
+    //    $block = $view->execute_display($display_id , $view_args);
+    //    $output .= $block['content'];
+    //  }
+    //  
+    //  if($view->total_rows > 0) {
+    //    $block = module_invoke('block', 'block' , 'view', 12);
+    //    $output .= $block['content'];
+    //  }
+    
+    //display
+    
+    //$sql = 'SELECT n.nid,n.title,n.created FROM node n,ftw_node_info fni WHERE n.nid = fni.nid AND fni.status=0';
+    //$reports = db_query($sql);
+    //foreach ($reports as $record) {
+      // Perform operations on $record->title, etc. here.
+      // in this example the available data would be mapped to object properties:
+      // $record->nid, $record->title, $record->created
+      //$output =  $record->title.'<br />';
+    //}
+    return $output;
+}
+function build_report_accept_form($nid) {
+    drupal_add_js(drupal_get_path('module', 'xuser') . '/js/help-jump.js');
+    
+    //check_ignore($nid);
+    
+    $output = '';
+    //$output .= '<div id="form-intro">' . get_globalsettings('field_global_accept_intro_value') . '</div>';
+    //$output .= 
+    //$output .= '<div id="form-help-bottom"><h3>Help</h3>' . get_globalsettings('field_global_accept_help_value') . '</div>';
+    return drupal_render(drupal_get_form('report_accept_form'));
+}
+function report_accept_form($form_state) {
+   $node = node_load(arg(2));
+
+   $form_state['rebuild'] = TRUE;
+   $form['report-group'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Report',
+        '#attributes' => array('class' => array('fieldset')),
+        '#description' => '<div class="report-ref">Reference Number: '.$node->nid.'</div>',
+    );
+    $form['report-group']['url'] = array(
+        '#type' => 'textfield',
+        '#title' => 'What is the website?',
+        '#value' => $node->title,
+        '#required' => TRUE,
+        //'#description' => help_button('help-url'),
+    );
+    $issue = '';
+    if (isset($node->field_accessibility_issue[$node->language][0]['value'])) $issue =$node->field_accessibility_issue[$node->language][0]['value'];
+    $form['report-group']['issue'] = array(
+        '#type' => 'textarea',
+        '#title' => 'What is the issue?',
+        '#value' => $issue,
+        '#required' => TRUE,
+    );
+    $info = field_info_field('field_report_status');
+
+    $form['status-group'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Status',
+        '#attributes' => array('class' => array('fieldset')),
+    ); 
+    $form['status-group']['status'] = array(
+        '#type' => 'select',
+        '#title' => 'Status',
+        '#options' => $info['settings']['allowed_values'],
+        '#value' => '',
+        '#weight' => 1,
+    ); 
+    $form['status-group']['comment'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Status Comment',
+        '#options' => $info['settings']['allowed_values'],
+        '#description' => 'Please put a short but useful description of the current report status.',
+        '#value' => '',
+        '#weight' => 1,
+    );
+    
+    $form['status-group']['notes'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Notes',
+        '#description' => 'For yourself and other volunteers who might view this report in future.',
+        '#value' => '',
+        '#weight' => 2,
+    );
+     $form['button-group'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Actions',
+        '#attributes' => array('class' => array('fieldset')),
+    );
+    
+    $form['button-group']['close'] = array(
+        '#type' => 'submit',
+        '#value' => t('Close the report'),
+    //    '#prefix' => help_button('help-close'),
+    );
+    
+    $form['button-group']['relist'] = array(
+        '#type' => 'submit',
+        '#value' => t('Relist the report'),
+    //    '#prefix' => '<br/>'.help_button('help-relist'),
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Accept>>',
+      );
+      $form['#redirect'] = 'dashboard/report/'.$node->nid.'/accept';
+      return $form;
+}
+
+function report_accept_form_validate($form, &$form_state) {
+    
+}
+function report_accept_form_submit($form, &$form_state) {
+    global $user;
+    $node = node_load(arg(2));
+    $node->title = $form_state['input']['url'];
+    $node->field_accessibility_issue[$node->language][0]['value']     = $form_state['input']['issue'];
+
+    //die($form_state['input']['comment']);
+    $node->field_report_status_comment[$node->language][0]['value'] = $form_state['input']['comment'];
+    $node->field_report_notes[$node->language][0]['value'] = $form_state['input']['notes'];
+    
+    //drupal_set_message('The report has been updated.');
+    
+    switch($form_state['values']['op']) {
+        case 'Close the report':
+            node_save($node);
+            drupal_goto('dashboard/report/'.$node->nid.'/close');
+            break;
+        case 'Relist the report':
+            $node->uid = 0;
+            node_save($node);
+            drupal_goto('dashboard/report/'.$node->nid.'/relist');
+            break;
+        default:
+            $node->field_report_status[0]['value'] = 'Assigned';
+            $node->uid = $user->uid;
+            node_save($node);
+            unset($form_state['storage']);
+            drupal_goto('dashboard');
+    }
+}
+
+function build_report_close_form($nid) {
+    drupal_add_js(drupal_get_path('module', 'xuser') . '/js/help-jump.js');
+    $output = '';
+    //$output .= '<div id="form-intro">' . get_globalsettings('field_global_close_intro_value') . '</div>';
+    $output .= drupal_render(drupal_get_form('report_close_form'));
+    //$output .= '<div id="form-help-bottom">' . get_globalsettings('field_global_close_page_value') . '</div>';
+    return $output;
+}
+function report_close_form($form_state) {
+    $node = node_load(arg(2));
+    
+    $form_state['rebuild'] = TRUE;
+    $options = array('Please select');
+    $dropdown_source = taxonomy_get_tree(9);
+    $dropdown_array = array();
+    foreach ($dropdown_source as $item) {
+        $key = $item->tid;
+        $value = $item->name;
+        $dropdown_array[$key] = $value;
+    }
+
+    $form['closure_reason'] = array(
+        '#type' => 'select',
+        '#title' => 'Closure reason',
+        '#options' => $dropdown_array,
+        '#required' => TRUE,
+    );
+    $form['closure_description'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Closure Description.',
+        '#description' => 'Additional information about the closure of the report (which may be read by other volunteers and the person who reported the issue).',
+    );
+    
+    $form['status-group'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Status',
+        '#attributes' => array('class' => array('fieldset')),
+    );
+    $form['status-group']['comment'] = array(
+        '#type' => 'hidden',
+        '#value' => 'Closed',
+    );
+    $form['status-group']['notes'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Notes',
+        '#description' => 'For yourself and other volunteers who might view this report in future.',
+        '#value' => $node->field_report_notes[$node->language][0]['value'],
+    );
+    
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Close report'),
+      );
+      $form['#redirect'] = 'dashboard';
+      return $form;
+}
+function report_close_form_validate($form, &$form_state) {
+    $term = taxonomy_term_load($form_state['input']['closure_reason']);
+    if($term->name == 'Other') {
+        if($form_state['input']['closure_description'] == '') {
+            form_set_error('field_report_closure_description', 'You have selected other as a closure reason. Please give some supportive information.');
+        }
+    }
+}
+function report_close_form_submit($form, &$form_state) {
+    global $user;
+    
+    $node = node_load(arg(2));
+    
+    $closure_tid = $form_state['input']['closure_reason'];
+    $term = taxonomy_term_load($closure_tid);
+    $closure_term_text = drupal_clean_css_identifier($term->name);
+    $node->field_report_closure_description[$node->language][0]['value'] = $form_state['values']['closure_description'];
+    $node->field_report_status[$node->language][0]['value'] = 'Closed';
+    $node->field_report_notes[$node->language][0]['value'] = $form_state['input']['notes'];
+
+    node_save($node);
+    //drupal_set_message('The report has been updated.');
+    // if it is spam or not an issue
+    
+    ////$r_uid = $node->field_report_user_id[0]['value'];
+    $r_uid = $node->field_report_user_id['und'][0]['value'];
+    $r_user = user_load($r_uid);
+    
+    // save into report closure reasons for counters
+    /////db_query("INSERT INTO {ftw_report_closure_reason} (nid,uid,reason_id) VALUES (%d, %d, %d)", $node->nid, $r_uid, $closure_tid);
+     //die($closure_term_text);
+    if ($closure_term_text == 'Spam') {
+        // spam so block user and email them
+        if ($r_uid != 1) {
+            
+            $num_updated = db_update('users') // Table name no longer needs {}
+                ->fields(array(
+                  'status' => 0,
+                ))
+                ->condition('uid', $r_uid, '=')
+                ->execute();
+            //db_query("UPDATE {users} SET status=0 WHERE uid= %d", $r_uid);
+        }
+        /// doesnt work, find equivalent$global_node = get_globalsettings();
+        //$body = $global_node->field_global_robotspam_body[0]['value'];
+        
+          /* MIME example kind of works $message = array(
+                        'id' => 'mymail',
+                        'to' => $r_user->mail,
+                        'subject' => "spam",
+                        'body' => 'body text for robot spam',
+                      );
+            $message=mimemail_prepare_message($message);
+            mimemail_mailengine('send',$message);*/
+            //die('here');
+            
+        // id for 'Email: Spam'
+        $spam_block = module_invoke('block','block_view',18);
+        // id for 'Email: Spam subject'
+        $spam_subject_block = module_invoke('block','block_view',53);
+
+        $message = array(
+                        'id' => 'mymail',
+                        'to' => $r_user->mail,
+                        'subject' => $spam_subject_block['content'],
+                        'body' => $spam_block['content'],
+                      );
+        xuser2_mail_send('xuser2', 'ftw_mail', $r_user->mail, language_default(), $message, 'donotreply@fixtheweb.net');
+      
+        //drupal_mail('xuser2', 'ftw_mail', $r_user->mail, language_default(), $message, 'donotreply@fixtheweb.net');
+        drupal_set_message('An email has been sent to the reporter.');
+        //die('here');
+    } else if ($closure_term_text == 'Not-an-accessibility-issue') {
+        // save a rec in the ftw_nodes_user
+        // check how many recs we have in ftw_nodes_user
+
+        db_insert('ftw_node_users') // Table name no longer needs {}
+            ->fields(array(
+              'nid' => arg(2),
+              'uid' => $r_uid,
+            ))
+            ->execute();
+        $no_classed_as_spam = db_query("SELECT COUNT(nid) AS count FROM ftw_node_users WHERE uid= :uid limit 1", array(":uid" => $r_uid))->fetchField();
+
+        if ((int)$no_classed_as_spam > 1) {
+                //update user set status=0 where uid = xxx
+            if ($r_uid != 1) {
+                db_update('users') // Table name no longer needs {}
+                    ->fields(array(
+                      'status' => 0,
+                    ))
+                    ->condition('uid', $r_uid, '=')
+                    ->execute();
+                //db_query("UPDATE {users} SET status=0 WHERE uid= %d", $r_uid);
+            }
+            db_delete('ftw_node_users')
+                ->condition('uid', $r_uid)
+                ->execute();
+            //db_query("DELETE FROM {ftw_node_users} WHERE uid = %d", $r_uid);
+            // send email saying they are blocked but check if spam or not 
+            //$global_node = get_globalsettings();
+            //$body = $global_node->field_global_acessspam_body_2[0]['value'];
+            // id for 'Email: Not an accessibility issue email'
+            $warning_block = module_invoke('block','block_view',16);
+            // id for 'Email: Not an accessibility issue email subject'
+            $warning_block_subject = module_invoke('block','block_view',50);
+            $message = array(
+                'subject' => $warning_block_subject['content'],
+                'body' => $warning_block['content'],
+            );
+            
+            //drupal_mail('xuser', 'contact_reporter_spam', $r_user->mail, language_default(), $params, 'donotreply@fixtheweb.net', TRUE);
+            xuser2_mail_send('xuser2', 'ftw_mail', $r_user->mail, language_default(), $message, 'donotreply@fixtheweb.net');
+            drupal_set_message('An email has been sent to the reporter.');
+        } else {
+        // send email warning to them that its not an issue
+            //$global_node = get_globalsettings();
+            //$body = $global_node->field_global_acessspam_body[0]['value'];
+            // id for 'Email: Not an accessibility issue email'
+            $warning_block = module_invoke('block','block_view',15);
+            // id for 'Email: Not an accessibility issue email 2 subject'
+            $warning_block_subject = module_invoke('block','block_view',51);
+            $message = array(
+                'subject' => $warning_block_subject['content'],
+                'body' => $warning_block['content'],
+            );
+            
+            //drupal_mail('xuser', 'contact_reporter_spam', $r_user->mail, language_default(), $params, 'donotreply@fixtheweb.net', TRUE);
+            xuser2_mail_send('xuser2', 'ftw_mail', $r_user->mail, language_default(), $message, 'donotreply@fixtheweb.net');
+            drupal_set_message('An email has been sent to the reporter.');
+        }
+
+    } else {
+        $r_uid = $node->field_report_user_id['und'][0]['value'];
+        ////////db_query("DELETE FROM {ftw_node_users} WHERE uid = %d", $r_uid);
+        db_delete('ftw_node_users')
+                ->condition('uid', $r_uid)
+                ->execute();
+        
+        if($user->uid != 1 && $r_uid > 0) {
+            $global_node = get_globalsettings();
+        
+            $r_user = user_load($r_uid);
+            $r_profile = content_profile_load('profile', $r_uid);
+            $report_back = $r_profile->field_profile_report_back['und'][0]['value'];
+            $link_view = 'dashboard/report/'.$node->nid . '/view';
+            
+            if($r_user->status == '1') {
+                if($report_back == 'Email me' || $report_back == 'Whichever suits the volunteer') {
+                    if($r_user->mail != '') {
+                        // id for 'Email: Closure email'
+                        $closed_block = module_invoke('block','block_view',17);
+                        // id for 'Email: Closure email subject'
+                        $closed_block_subject = module_invoke('block','block_view',52);
+                        $body = $warning_block['content'];
+                        $body = str_replace('[name]', $r_user->name, $body);
+                        $body = str_replace('[url]', $node->field_report_url[$node->language][0]['value'], $body);
+                        $body = str_replace('[closure reason]', check_markup($closure_term->name, $node->format, FALSE), $body);
+                        $body = str_replace('[link]', l('http://www.fixtheweb.net/'.$link_view, $link_view), $body);
+                        $body = str_replace('href="/', 'href="http://www.fixtheweb.net/', $body);
+
+                        //send
+                        $params = array(
+                            'body' => $body,
+                            'subject' => $closed_block_subject['content'],
+                        );
+                        drupal_mail('xuser', 'contact_web_owner', $r_user->mail, language_default(), $params, $user->mail, TRUE);
+                        drupal_mail('xuser', 'contact_web_owner', $user->mail, language_default(), $params, $user->mail, TRUE);
+                        drupal_set_message('An email has been sent to the reporter and a copy to yourself.');
+
+
+                    }
+                } elseif ($report_back == 'Tweet @me') {
+                    //tweet
+                    $twitter = $node->field_report_twitter_username[0]['value'];
+                    if($twitter == '') {
+                        $twitter = $profile->field_profile_tusername[0]['value'];
+                    }
+
+                    if($twitter != '') {
+
+                        // SEND TWITTER
+                        $body = $global_node->field_global_reporter_tweetback[0]['value'];
+                        //drupal_set_message('$body =' . $body);
+                        $body = str_replace('[name]', $user->name, $body);
+                        $body = str_replace('[link]', l($link_view, $link_view), $body);
+                        $body = str_replace('href="/', 'href="http://www.fixtheweb.net/', $body);
+
+                        //TODO
+                        $screen_name = 'joejarlett';
+                        $password = 'apples1';
+                        $to = $twitter;
+                        $text = $to . ' ' . $body;
+
+                        $url = "http://" . variable_get('twitter_api_url', 'twitter.com') . "/statuses/update.xml";
+                        //drupal_set_message($url);
+                        $headers = array('Authorization' => 'Basic '. base64_encode($screen_name .':'. $password),
+                                       'Content-type' => 'application/x-www-form-urlencoded');
+                        $data = 'status='. urlencode($text);
+                        //if (!empty($source) && variable_get('twitter_set_source', TRUE)) {
+                        //    $data .= "&source=". urlencode($source);
+                        //}
+                        $response = drupal_http_request($url, $headers, 'POST', $data);
+                        //drupal_set_message('url:'.$url.' headers:'.print_r($headers, TRUE) . ' data:' . $data . ' responce:' . $responce); 
+                        //drupal_set_message(twitter_send_dm('joejarlett', 'apples1', $twitter, $body));
+                        drupal_set_message('twitter message sent to ' . $twitter);
+
+
+
+                    }
+                }
+            }
+            
+        
+        }
+    }
+    
+    
+    unset($form_state['storage']);
+    $form_state['redirect'] = 'dashboard';
+}
+
+function build_report_relist_form($nid) {
+	//drupal_add_js(drupal_get_path('module', 'xuser') . '/js/help-jump.js');
+	$output = '';
+	//$output .= '<div id="form-intro">' . get_globalsettings('field_global_relist_intro_value') . '</div>';
+	$output .= drupal_render(drupal_get_form('report_relist_form'));
+	//$output .= '<div id="form-help-bottom">' . get_globalsettings('field_global_relist_page_value') . '</div>';
+	return $output;
+}
+function report_relist_form($form_state) {
+	$node = node_load(arg(2));
+	
+        $form_state['rebuild'] = TRUE;
+	$form['notes'] = array(
+		'#type' => 'textarea',
+		'#title' => 'Notes',
+		'#description' => 'For yourself and other volunteers who might view this report in future.',
+		'#value' => $node->field_report_notes[$node->language][0]['value'],
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Relist'),
+  	);
+	$form['#redirect'] = 'dashboard';
+	return $form;
+}
+function report_relist_form_validate($form, &$form_state) {
+	
+}
+function report_relist_form_submit($form, &$form_state) {
+	$node = node_load(arg(2));
+	//die('got here');
+	$node->field_report_notes[$node->language][0]['value'] = $form_state['input']['notes'];
+	//drupal_set_message('The report has been updated.');
+	
+        $node->field_report_status[$node->language][0]['value'] = 'Waiting';
+        $node->uid = 0;
+        //drupal_set_message(print_r($node, TRUE));
+        node_save($node);
+        unset($form_state['storage']);
+        $form_state['redirect'] = 'dashboard';
+}
+//TWEETS
+function update_tweets() {
+    $witter_search = '#fixtheweb';
+	include('TwitterAPIExchange.php');
+    $settings['oauth_access_token']         = '160933372-Q3RHuoVi0jdfo2myHHu13jS5EoJ2hokeMHqyMFL7';
+    $settings['oauth_access_token_secret']  = 'mGOU2woVwQxP4lZTHV7OYlSVtlhOjZaL0VHALiQcyg';
+    $settings['consumer_key']               = 'cknIySyDAvjlgpz0z0nxA';
+    $settings['consumer_secret']            = 'fqgtEEcr1nRnshFAhQKBXboIp9DBgDnxY6gjGIi9Ts';
+
+    // Your specific requirements
+    $url = 'https://api.twitter.com/1.1/search/tweets.json';
+    $requestMethod = 'GET';
+    $getfield = '?q=#fixtheweb&count=100';
+    
+    $since_id = variable_get('xuser_twitter_since_id', '');
+    $since_id_update = $since_id;
+    
+    if($since_id != '') {
+        /////$getfield .= '&since_id=' . $since_id;
+    }
+    // Perform the request
+    $twitter = new TwitterAPIExchange($settings);
+
+	$page = 1;
+	//while($page != 0) {
+		//xmessage($url . '&page=' . $page);
+        //$ret = drupal_http_request($url . '&page=' . $page);
+        //$f = $getfield.'&page=' . $page;
+		$ret = $twitter->setGetfield($getfield)
+                 ->buildOauth($url, $requestMethod)
+                 ->performRequest();
+		if ($ret->code < 200 || $ret->code > 399) {
+			$errmsg = json_decode($ret->data);
+			$errmsg = t('The error message received was: @message.', array('@message' => $errmsg->error));
+			if ($ret->code == 400) {
+			$errmsg .= t('This site may be subject to rate limiting. For more information, see:') . 'http://apiwiki.twitter.com/Rate-limiting';
+		}
+			//log_message('xuser', 'Could not retrieve data from Twitter.');
+			//throw new Exception(t('Could not retrieve data from Twitter.') .' '. $errmsg);
+		}
+
+		$tweets = json_decode($ret);
+        
+	    if (is_array($tweets->statuses)) {
+	      $items = $tweets->statuses;
+	    }
+
+        //foreach ($items as $item) {
+        //    print_r($item);
+        //    echo '<br />***********<br />';
+        //    //echo $item->metadata;
+        //}
+        //echo '<br />***********<br />';
+        //die('here');
+	    if (is_array($items)) {
+      		//$items = array_slice($items, 0, $this->num_items);
+      		foreach ($items as $item) {
+      			
+      			//content_type_tweets
+      			$row = db_fetch_object(db_query("SELECT nid FROM content_type_tweet WHERE field_twitter_id_value = %s LIMIT 1", $item->id_str));
+      			if(!$row->nid) {
+                                $node = new stdClass();
+                                $node->type = 'tweet';
+                                $node->title = 'Tweet: ' . substr($item->text, 0, 20).'...';
+			        $node->field_twitter_id[$node->language][0]['value'] = $item->id_str;
+			        $node->field_t_text[$node->language][0]['value'] = $item->text;
+			        $node->field_t_search_key[$node->language][0]['value'] = $twitter_search;
+		        	$node->field_t_data[$node->language][0]['value'] = json_encode($item);
+		        	$node->field_report_source[$node->language][0]['value'] = 'Twitter';
+		        	node_save($node);
+      			}
+      			
+      			//content_type_reports
+		        if(strpos($item->text, '#fail')) {
+		        	//xmessage('adding ' .  $item->id_str);
+		        	$row = db_fetch_object(db_query("SELECT nid FROM content_type_report WHERE field_report_twitter_id_value = %s LIMIT 1", $item->id_str));
+      				if(!$row->nid) {
+		        		$sql = "SELECT u.uid, u.mail 
+								FROM users u
+								INNER JOIN node n
+								ON u.uid = n.uid
+								INNER JOIN content_type_profile p
+								ON n.nid = p.nid
+								WHERE n.type = 'profile'
+								AND p.field_profile_tusername_value = '".$item->username."'
+								LIMIT 1";
+						$row = db_fetch_array(db_query($sql));
+						
+		        		//echo 'node:'.$item->user->profile_image_url;
+						$node = new stdClass();
+					    $node->type = 'report'; // ??????
+					    $node->uid = '0';
+					    $node->name = 'TWITTER';
+					    $node->title = 'Tweet : ' . substr($item->text, 0, 20).'...';
+					    $node->body = $item->text;
+					    $node->field_report_url[$node->language][0]['value'] = 'http://';
+					    $node->field_report_twitter_status[$node->language][0]['value'] = 'Waiting';
+					    $node->field_report_twitter_id[$node->language][0]['value'] = $item->id_str;
+					    $node->field_report_twitter_searchtag[$node->language][0]['value'] = $twitter_search;
+					    $node->field_report_twitter_username[$node->language][0]['value'] = '@' .$item->user->name;
+					    $node->field_report_twitter_image[$node->language][0]['value'] = $item->user->profile_image_url;
+					    $node->field_report_weighting[$node->language][0]['value'] = '0.6';
+					    if($row['uid']) $node->field_report_user_id[$node->language][0]['value'] = $row['uid'];
+					    if($row['mail']) $node->field_report_mail_email[$node->language][0]['value'] = $row['mail'];
+					    
+					    node_save($node);
+					}
+			    
+		        }
+		        
+		        //update global variable xuser_twitter_since_id
+      			if($item->id_str > $since_id_update) {
+      				//xmessage('is bigger ' . $item->id_str);
+					$since_id_update = $item->id_str;
+      			}
+			}
+            //die('here');
+		}
+	    
+	    //for eace page
+		/*if(sizeof($items) == 100 && $page < 10) {
+			$page++;
+		} else {
+			//break loop
+			$page = 0;
+		}*/
+	//}
+	
+	//update global variable xuser_twitter_since_id
+	if($since_id != $since_id_update) {
+		variable_set('xuser_twitter_since_id', $since_id_update);
+	}
+}
+
+/**
+* The report counter block view
+*/
+function build_block_counter() {
+    global $user;
+    
+    
+    $block['subject'] = 'Current count';
+    $output = '';
+    
+    $stats = get_stats(FALSE);
+    foreach($stats as $stat) {
+        $output .= '<p><span class="count">' . $stat['value'] . '</span> '.l($stat['label'], 'stats', array('fragment' => $stat['id'], 'external' => TRUE)).'</p>';
+    }
+    
+    //$block['content'] = $output;
+    //return $block;
+    return $output;
+}
+function get_stats($fullpage=TRUE) {
+    
+    $stats['reporters']['id'] = 'reporters';
+    $stats['reporters']['label'] = 'Reporters';
+    //$stats['reporters']['value'] = db_fetch_object(db_query("SELECT COUNT(uid) AS count FROM users_roles WHERE (rid = 3 || rid = 7)"))->count;
+    $stats['reporters']['value'] =0;
+    //if($fullpage) $stats['reporters']['description'] = get_globalsettings('field_count_reporters_value');
+    if($fullpage) $stats['reporters']['description'] = 'to be done';
+    
+    $stats['volunteers']['id'] = 'volunteers';
+    $stats['volunteers']['label'] = 'Volunteers';
+    //$stats['volunteers']['value'] = db_fetch_object(db_query("SELECT COUNT(uid) AS count FROM users_roles WHERE (rid = 4 || rid = 7)"))->count;
+    $stats['volunteers']['value'] = 0;
+    //if($fullpage) $stats['volunteers']['description'] = get_globalsettings('field_count_volunteers_value');
+    if($fullpage) $stats['volunteers']['description'] = 'to be done...';
+    
+    $stats['reported_minus_tweets']['id'] = 'websites-reported';
+    $stats['reported_minus_tweets']['label'] = 'Websites reported';
+    //$stats['reported_minus_tweets']['value'] = db_fetch_object(db_query("SELECT COUNT(nid) AS count FROM node WHERE type = 'report' AND title != 'http://'"))->count;
+    $stats['reported_minus_tweets']['value'] = db_query("SELECT COUNT(nid) AS count FROM node WHERE type = 'report' AND title != 'http://'")->fetchField();
+    //if($fullpage) $stats['reported_minus_tweets']['description'] = get_globalsettings('field_count_websites_reported_value');
+    if($fullpage) $stats['reported_minus_tweets']['description'] = 'description to be done';
+    
+    $stats['tweets']['id'] = 'tweets';
+    $stats['tweets']['label'] = 'Tweets';
+    //$stats['tweets']['value'] = db_fetch_object(db_query("SELECT COUNT(nid) AS count FROM content_type_tweet"))->count;
+    $stats['tweets']['value'] = 0;
+    //if($fullpage) $stats['tweets']['description'] = get_globalsettings('field_count_tweets_value');
+    if($fullpage) $stats['tweets']['description'] = 'to be done';
+                         
+    //$reports_assigned = db_fetch_object(db_query("SELECT COUNT(nid) AS count from content_type_report WHERE field_report_status_value = 'Assigned'"))->count;
+    $reports_assigned =  db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value = 'Assigned'")->fetchField();
+    $reports_contacted = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value = 'Contacted'")->fetchField();
+    
+    $stats['reports_in_progress']['id'] = 'reports-in-progress';
+    $stats['reports_in_progress']['label'] = 'Reports in progress';
+    $stats['reports_in_progress']['value'] = $reports_assigned + $reports_contacted;
+    //if($fullpage) $stats['reports_in_progress']['description'] = get_globalsettings('field_count_reports_in_progress_value');
+    if($fullpage) $stats['reports_in_progress']['description'] = 'to be done';
+    
+    
+    $stats['informed']['id'] = 'owners-informed';
+    $stats['informed']['label'] = 'Owners informed';
+    $stats['informed']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Issue Fixed')")->fetchField();
+    //if($fullpage) $stats['informed']['description'] = get_globalsettings('field_count_owners_informed_value');
+    if($fullpage) $stats['informed']['description'] = 'to be done';
+    
+    
+    $stats['achnowledged']['id'] = 'owners-acknowledged';
+    $stats['achnowledged']['label'] = 'Owners acknowledged';
+    $stats['achnowledged']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Issue Fixed')")->fetchField();
+    if($fullpage) $stats['achnowledged']['description'] = get_globalsettings('field_count_owners_acknowledged_value');
+    
+    
+    $stats['fixed']['id'] = 'owners-fixed-site';
+    $stats['fixed']['label'] = 'Owners fixed site';
+    $stats['fixed']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Issue Fixed')")->fetchField();
+    if($fullpage) $stats['fixed']['description'] = get_globalsettings('field_count_owners_fixed_value');
+    
+    $stats['spam']['id'] = 'spam';
+    $stats['spam']['label'] = 'Spam';
+    //$stats['spam']['value'] = db_fetch_object(db_query("SELECT COUNT(nid) as count FROM term_node WHERE tid = 15"))->count;
+    $stats['spam']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Spam')")->fetchField();
+    if($fullpage) $stats['spam']['description'] = get_globalsettings('field_count_spam_value');
+    
+    $stats['not_an_accessibility_issue']['id'] = 'not_an_accessibility_issue';
+    $stats['not_an_accessibility_issue']['label'] = 'Not an accessibility issue';
+    $stats['not_an_accessibility_issue']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Not an accessibility issue')")->fetchField();
+    if($fullpage) $stats['not_an_accessibility_issue']['description'] = get_globalsettings('field_count_not_an_accessibility_issue_value');
+    
+    $stats['usability_or_tech_issue']['id'] = 'usability_or_tech_issue';
+    $stats['usability_or_tech_issue']['label'] = 'Usability or tech issue';
+    $stats['usability_or_tech_issue']['value'] = db_query("SELECT count(*) as count FROM node n, field_data_field_report_status s WHERE s.entity_type = 'node' AND s.entity_id = n.nid AND s.field_report_status_value in ('Usability or tech issue')")->fetchField();
+    if($fullpage) $stats['usability_or_tech_issue']['description'] = get_globalsettings('field_count_usability_or_tech_issue_value');
+    
+    if($fullpage) {
+        $stats['incorrectreports']['id'] = 'incorrect-reports';
+        $stats['incorrectreports']['label'] = 'Incorrect reports';
+        $stats['incorrectreports']['value'] = $stats['reported_minus_tweets']['value'] - $stats['reports_in_progress']['value'] - $stats['informed']['value'] - $stats['achnowledged']['value'] - $stats['fixed']['value'];
+        $stats['incorrectreports']['description'] = get_globalsettings('field_count_incorrect_reports_value');
+    }
+        
+    return $stats;
+}
+function build_stats_page() {
+    $stats = get_stats();
+    
+    $output = '<dl>';
+    foreach($stats as $stat) {
+        $output .= '<dt><span class="count" id="'.$stat['id'].'">'.$stat['value'] . '</span> '.$stat['label'].'.</dt><dd>'.$stat['description'].'</dd>';
+    }
+    $output .= '</dl>';
+    
+    return $output;
+}
